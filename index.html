@@ -292,6 +292,41 @@ button:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
 .rank.go{animation:stamp .5s cubic-bezier(.3,1.6,.5,1) forwards}
 @keyframes stamp{0%{transform:scale(3) rotate(-30deg);opacity:0}70%{transform:scale(.9) rotate(4deg);opacity:1}100%{transform:rotate(-8deg);opacity:1}}
 .rank small{position:absolute;bottom:12px;font-size:10px;letter-spacing:.2em}
+
+.slot{cursor:pointer;transition:transform .15s}
+.slot:hover{transform:translateY(-3px)}
+#tip{position:fixed;z-index:40;pointer-events:none;background:var(--ink);color:#fff;border-radius:12px;padding:6px 10px;font-size:12px;font-weight:700;max-width:230px;line-height:1.45;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+#tip b{color:var(--blue2);font-family:var(--disp)}
+#prof{z-index:35}
+#prof .panel{position:relative;gap:12px;padding-top:22px}
+.pclose{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font-size:20px;line-height:1;display:grid;place-items:center}
+.phead{display:flex;gap:12px;align-items:center;padding-right:36px}
+.phead svg{width:92px;height:92px;flex:none}
+.phead .pf{font-family:var(--num);font-weight:700;color:var(--blue);font-size:15px}
+.phead h3{margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--ink);color:#fff}
+.tags span.b{background:var(--blue)}.tags span.w{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.pfig{background:#f1f5fa;border-radius:16px;padding:8px}
+.pfig svg{width:100%;height:auto;display:block}
+.facts{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.65;color:#2a3442}
+.plink{background:#e8f2fd;border-radius:14px;padding:9px 12px;font-size:13.5px;line-height:1.6;font-weight:700;color:var(--ink)}
+.plink b{color:var(--blue)}
+.ptitle{font-family:var(--disp);font-weight:800;font-size:16px;margin:4px 0 0;color:var(--ink)}
+.props{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.props div{background:var(--ink);color:#fff;border-radius:14px;padding:8px;font-size:12px;line-height:1.45;font-weight:700;text-align:center}
+.props div b{display:block;color:var(--blue2);font-family:var(--disp);font-size:13px;margin-bottom:2px}
+.icards{display:grid;gap:8px}
+.icard{border:2px solid #dbe5f0;border-radius:16px;padding:10px 12px}
+.icard h4{margin:0 0 4px;font-family:var(--disp);font-size:15px;display:flex;gap:8px;align-items:center;color:var(--ink)}
+.icard h4 i{font-style:normal;font-family:var(--num);background:var(--blue);color:#fff;border-radius:8px;padding:1px 7px;font-size:12px}
+.icard p{font-size:13.5px;line-height:1.65}
+.why{background:var(--ink);color:#fff;border-radius:18px;padding:14px}
+.why h4{margin:0 0 6px;font-family:var(--disp);font-size:16px;color:var(--blue2)}
+.why p{color:#e8eef6;font-size:14px;line-height:1.75}
+.why p+p{margin-top:8px}
+.locked{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.locked svg{width:120px;height:120px;filter:brightness(0);opacity:.15}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
 @media (min-width:760px){#coach,#talk,#readouts,#extra{max-width:640px;width:100%;margin-left:auto;margin-right:auto}}
 </style>
@@ -343,6 +378,7 @@ button:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
 </div>
 <div id="freeze" hidden><div class="fz"><div>STOP ▶ GRAPH CHECK ▶ STOP ▶ GRAPH CHECK ▶ STOP ▶ GRAPH CHECK ▶ STOP ▶ GRAPH CHECK ▶ STOP ▶ GRAPH CHECK ▶ STOP ▶ GRAPH CHECK ▶ </div></div></div>
 
+<div id="prof" class="ov dim" hidden><div class="panel in" id="profPanel"></div></div><div id="tip" hidden></div>
 <div id="win" class="cele" hidden></div>
 <div id="finale" class="cele" hidden></div>
 <canvas class="fxc" id="burst" style="position:fixed;z-index:31"></canvas>
@@ -619,7 +655,7 @@ function svgRates(){const w=340,h=230;const ax={w,h,l:40,r:14,t:22,b:30,x0:0,x1:
   return {svg:SVGHEAD(w,h)+s+'</svg>',map:{...ax,xs:1,ys:1,xu:'s',yu:J('個','')}}}
 const PD={
   water:{xt:.32,yt:.25,xc:.85,yc:.82,ms:-.12,ve:1.8,atm:.45,xticks:[['0',.296,'end'],['0.01',.32,'start'],['100',null,'middle'],['374',.85,'middle']],yticks:[['0.0061',.25],['1.01',.45],['220',.82]],labs:{S:[.13,.72],L:[.52,.66],G:[.58,.14],X:[.925,.93]}},
-  co2:{xt:.42,yt:.42,xc:.85,yc:.82,ms:.12,ve:1.6,atm:.18,xticks:[['−78.5',null,'end'],['−56.3',.42,'start'],['31',.85,'middle']],yticks:[['1.01',.18],['5.15',.42],['73.5',.82]],labs:{S:[.17,.66],L:[.62,.72],G:[.62,.22],X:[.925,.93]}}
+  co2:{xt:.42,yt:.42,xc:.85,yc:.82,ms:.12,ve:1.6,atm:.18,xticks:[['−78.5',null,'end'],['−56.3',.42,'start'],['31',.85,'middle']],yticks:[['1.01',.18],['5.15',.42],['73.8',.82]],labs:{S:[.17,.66],L:[.62,.72],G:[.62,.22],X:[.925,.93]}}
 };
 const pdFs=(p,x)=>p.yt*Math.pow(Math.max(0,x)/p.xt,2),pdFv=(p,x)=>p.yt+(p.yc-p.yt)*Math.pow(clamp((x-p.xt)/(p.xc-p.xt),0,1),p.ve),pdXm=(p,y)=>p.xt+(y-p.yt)*p.ms;
 function pdRegion(p,x,y){if(y>=p.yt){if(x<pdXm(p,y))return 'S';if(x>=p.xc)return y>=p.yc?'X':'G';return y>=pdFv(p,x)?'L':'G'}return x<p.xt&&y>=pdFs(p,x)?'S':'G'}
@@ -694,7 +730,7 @@ function fxLoop(cvs,opt={}){const x=cvs.getContext('2d');let W,H;const fit=()=>{
     requestAnimationFrame(step)})();
   return {stop(){run=false},fw,confetti,fit}}
 const starSVG='<svg viewBox="0 0 48 48"><path d="M24 4l5.9 12.6 13.8 1.6-10.2 9.4 2.8 13.6L24 34.4l-12.3 6.8 2.8-13.6L4.3 18.2l13.8-1.6z"/></svg>';
-function partyHTML(newId){return PARTY.map(id=>`<div class="slot ${id==='boss'?'kslot':''} ${S.allies.has(id)?'':'off'} ${id===newId?'new':''}">${charSVG(id)}</div>`).join('')}
+function partyHTML(newId){return PARTY.map(id=>`<div data-id="${id}" class="slot ${id==='boss'?'kslot':''} ${S.allies.has(id)?'':'off'} ${id===newId?'new':''}">${charSVG(id)}</div>`).join('')}
 
 /* ================= SHARED 3D GIMMICKS ================= */
 function makeBurner(minL,parent=G){const y0=-.22;const g=new THREE.Group();parent.add(g);
@@ -1185,12 +1221,14 @@ const G6=()=>[{ch:'mizu',chart:()=>svgPD('water',[[.13,.62,'A'],[.47,.6,'B'],[.6
   h:J('ミッション2を思い出そう。温度を固定して上（高圧）へ動いたら？','Remember mission 2. What happened when you moved up (higher pressure) at a fixed temperature?'),ex:J('融解曲線が左上がりなので、温度一定で加圧すると固体の領域から液体の領域に入る。多くの物質（CO₂など）では右上がりで、この現象は起こらない。','Because the melting curve leans left, pressing at constant temperature moves from solid into liquid. For most substances (like CO₂) it leans right, so this does not happen.')},
  {ch:'dora',chart:()=>svgPD('co2'),q:J('ドラポン「オレの状態図だ」 1.01×10⁵ Pa でドライアイスを加熱するとどうなる？','Dorapon: “My diagram.” What happens when dry ice is heated at 1.01×10⁵ Pa?'),c:J(['−78.5℃で昇華して気体になる','−56.3℃で融解して液体になる','31℃で沸騰する','液体を経て気体になる'],['It sublimes into gas at −78.5 °C','It melts into liquid at −56.3 °C','It boils at 31 °C','It becomes liquid, then gas']),a:0,
   h:J('1.01×10⁵ Pa の横線は三重点（5.15×10⁵ Pa）より上？下？','Is the 1.01×10⁵ Pa line above or below the triple point (5.15×10⁵ Pa)?'),ex:J('1.01×10⁵ Pa は三重点の圧力より低いので液体の領域を通らない。−78.5℃で昇華する。','1.01×10⁵ Pa is below the triple-point pressure, so it never crosses the liquid region. It sublimes at −78.5 °C.')},
- {ch:'mizu',chart:()=>svgVP({liqs:['w'],vl:[60]}),q:J('【入試レベル】容積 8.3 L の容器に水 0.10 mol を入れ、60℃に保った。容器内の圧力は何Pa？（R＝8.3×10³ Pa·L/(K·mol)、液体の体積は無視）','[Exam level] 0.10 mol of water is sealed in an 8.3 L container at 60 °C. What is the pressure inside? (R = 8.3×10³ Pa·L/(K·mol); ignore the liquid’s volume)'),c:['0.20×10⁵ Pa','0.33×10⁵ Pa','0.47×10⁵ Pa','0.13×10⁵ Pa'],a:0,
-  h:J('まず「すべて気体だと仮定」して P＝nRT/V を計算（T＝333 K）。その値を60℃の飽和蒸気圧（グラフをなぞって読もう）と比べよう。飽和蒸気圧をこえることはできない！','First assume it is all gas and find P = nRT/V (T = 333 K). Compare with the saturated vapor pressure at 60 °C (trace the graph). The pressure cannot exceed it!'),
-  ex:J('仮にすべて気体なら P＝0.10×8.3×10³×333÷8.3＝0.33×10⁵ Pa。これは60℃の飽和蒸気圧 0.20×10⁵ Pa より大きいので不可能。一部が液体として残り、圧力は 0.20×10⁵ Pa。','If it were all gas, P = 0.10×8.3×10³×333÷8.3 = 0.33×10⁵ Pa. That is above the saturated vapor pressure at 60 °C (0.20×10⁵ Pa), which is impossible. Some stays liquid, and the pressure is 0.20×10⁵ Pa.')},
- {ch:'mizu',chart:()=>svgVP({liqs:['w'],vl:[80]}),q:J('【最終問題】同じ容器（8.3 L、水 0.10 mol）を80℃にした。容器内の圧力は何Pa？','[Final question] The same container (8.3 L, 0.10 mol water) is heated to 80 °C. What is the pressure inside?'),c:['0.35×10⁵ Pa','0.47×10⁵ Pa','0.20×10⁵ Pa','1.01×10⁵ Pa'],a:0,
-  h:J('すべて気体と仮定すると T＝353 K で P＝？ それを80℃の飽和蒸気圧と比べよう。','Assume all gas at T = 353 K: P = ? Compare with the saturated vapor pressure at 80 °C.'),
-  ex:J('仮定の値 P＝0.10×8.3×10³×353÷8.3＝0.35×10⁵ Pa は、80℃の飽和蒸気圧 0.47×10⁵ Pa より小さい。だから水はすべて気体で、圧力は 0.35×10⁵ Pa。','The assumed value, 0.10×8.3×10³×353÷8.3 = 0.35×10⁵ Pa, is below the saturated vapor pressure at 80 °C (0.47×10⁵ Pa). So all the water is gas, and the pressure is 0.35×10⁵ Pa.')}];
+ {ch:'mizu',chart:()=>svgVP({liqs:['w'],vl:[80]}),q:J('【難問】空気を抜いた同じ容積の密閉容器A・Bに、Aには水を多く、Bには少しだけ入れて80℃に保った。どちらにも液体の水が残っている。十分に時間がたった後の容器内の圧力について正しいものは？','[Hard] Two sealed, air-free containers A and B have the same volume. A gets a lot of water, B only a little, and both are kept at 80 °C. Both still contain some liquid. After enough time, which is true about the pressure inside?'),
+  c:J(['AとBは等しく、どちらも約0.47×10⁵ Pa','水の多いAの方が大きい','水の少ないBの方が大きい','水の量がわからないと決まらない'],['A and B are equal, both about 0.47×10⁵ Pa','A, with more water, is higher','B, with less water, is higher','It cannot be decided without the amounts']),a:0,
+  h:J('液体が残っているとき、容器の中の水蒸気の圧力を決めるのは何？水の量？それとも温度？ステージ4のピストン実験を思い出そう。','When liquid remains, what decides the vapor pressure: the amount of water, or the temperature? Remember the piston in stage 4.'),
+  ex:J('液体が残っていれば気液平衡になり、圧力はその温度の飽和蒸気圧で決まる。液体の量や容器の大きさには関係しない。80℃の飽和蒸気圧はグラフから約0.47×10⁵ Pa。','If liquid remains, the system is at equilibrium and the pressure equals the saturated vapor pressure for that temperature — the amount of liquid and the container size do not matter. From the graph, it is about 0.47×10⁵ Pa at 80 °C.')},
+ {ch:'mizu',chart:()=>svgPD('water'),q:J('【最終問題】空気を抜いた丈夫な密閉容器に水を入れ、液体と水蒸気が共存した状態から加熱し続ける（水の量は、加熱しても液体が残り続ける量とする）。状態図の上で、容器内の状態を表す点はどう動き、最後に何が起こる？','[Final question] A strong, sealed, air-free container holds water with liquid and vapor together, and it keeps being heated (there is enough water that some liquid always remains). On the phase diagram, how does the point move, and what finally happens?'),
+  c:J(['蒸気圧曲線にそって右上へ進み、臨界点で液面が消えて超臨界流体になる','蒸気圧曲線にそって進み、100℃で液体がすべて気体になる','融解曲線にそって上へ進み、固体になる','温度だけが上がり、圧力は1.01×10⁵ Paのまま変わらない'],['It climbs along the vapor pressure curve, and at the critical point the liquid surface vanishes — a supercritical fluid','It moves along the vapor pressure curve and all the liquid turns to gas at 100 °C','It climbs along the melting curve and becomes solid','Only the temperature rises; the pressure stays at 1.01×10⁵ Pa']),a:0,
+  h:J('液体と気体が共存している間、圧力はその温度の飽和蒸気圧になる。密閉されているので、外の大気圧1.01×10⁵ Paは関係ない。蒸気圧曲線のゴールはどこ？','While liquid and gas coexist, the pressure equals the saturated vapor pressure. The container is sealed, so outside air pressure (1.01×10⁵ Pa) does not matter. Where does the vapor pressure curve end?'),
+  ex:J('気液共存の間、点は蒸気圧曲線の上を右上へ進む（温度が上がると飽和蒸気圧も上がる）。密閉容器なので100℃で沸騰して終わることはない。曲線の終点である臨界点（374℃・220×10⁵ Pa）に達すると、液体と気体の区別がなくなって液面が消え、超臨界流体になる。――チョウリンカイザー誕生の瞬間だ。','While liquid and gas coexist, the point moves up and to the right along the vapor pressure curve (higher temperature, higher saturated vapor pressure). In a sealed container it does not simply boil away at 100 °C. At the end of the curve — the critical point (374 °C, 220×10⁵ Pa) — liquid and gas become indistinguishable, the surface vanishes, and it becomes a supercritical fluid. That is how Critikaiser is born.')}];
 
 /* ================= CELEBRATIONS ================= */
 const ALLY=[null,'mizu','nafu','etano','eteru','nitro','dora'];
@@ -1257,6 +1295,78 @@ function finale(){const f=$('#finale');const sec=Math.round((now()-S.start)/1000
 function shakeEl(el,ms){el.animate([{transform:'translate(0,0)'},{transform:'translate(-4px,3px)'},{transform:'translate(5px,-2px)'},{transform:'translate(-3px,-4px)'},{transform:'translate(0,0)'}],{duration:120,iterations:Math.round(ms/120)})}
 function countUp(el,to,fmt,ms){const t0=now();let last=-1;(function f(){const k=Math.min(1,(now()-t0)/ms);const v=Math.round(to*(1-Math.pow(1-k,3)));if(v!==last){last=v;el.textContent=fmt(v);Snd.tick()}if(k<1)requestAnimationFrame(f)})()}
 
+
+/* ================= TEAM PROFILES ================= */
+const FIGSTYLE='font-family="Zen Kaku Gothic New, sans-serif" font-weight="700"';
+function atom(x,y,r,fill,label,tc='#04060a'){return `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="#04060a" stroke-width="2.5"/><text x="${x}" y="${y+r*.38}" text-anchor="middle" font-size="${r*1.05}" fill="${tc}" font-family="Chakra Petch" font-weight="700">${label}</text>`}
+function profFig(id){const W='<svg viewBox="0 0 300 130" xmlns="http://www.w3.org/2000/svg" '+FIGSTYLE+'>',E='</svg>';
+  if(id==='mizu'){const mol=(ox,oy,a)=>{const r=a*Math.PI/180,h1=[ox+30*Math.sin(r-0.91),oy+30*Math.cos(r-0.91)],h2=[ox+30*Math.sin(r+0.91),oy+30*Math.cos(r+0.91)];
+      return `<line x1="${ox}" y1="${oy}" x2="${h1[0]}" y2="${h1[1]}" stroke="#04060a" stroke-width="5"/><line x1="${ox}" y1="${oy}" x2="${h2[0]}" y2="${h2[1]}" stroke="#04060a" stroke-width="5"/>${atom(h1[0],h1[1],10,'#fff','H')}${atom(h2[0],h2[1],10,'#fff','H')}${atom(ox,oy,17,'#0072CE','O','#fff')}`};
+    return W+mol(70,42,0)+`<text x="70" y="16" text-anchor="middle" font-size="12" fill="#0072CE">δ−</text><text x="30" y="96" font-size="12" fill="#5b6878">δ+</text><text x="102" y="96" font-size="12" fill="#5b6878">δ+</text><text x="70" y="76" text-anchor="middle" font-size="10" fill="#5b6878">104.5°</text>
+      <line x1="94" y1="66" x2="168" y2="80" stroke="#0072CE" stroke-width="3" stroke-dasharray="5 4"/><text x="132" y="62" text-anchor="middle" font-size="12" fill="#0072CE">${J('水素結合','H-bond')}</text>`+mol(186,84,90)+`<text x="292" y="124" text-anchor="end" font-size="11" fill="#5b6878">${J('折れ線形・極性分子','bent · polar')}</text>`+E}
+  if(id==='nafu'){const hx=(cx,cy,o)=>`<path d="${hexPath(cx,cy,26)}" fill="${o?'none':'#fff'}" stroke="#04060a" stroke-width="${o?2:3.5}" ${o?'stroke-opacity=".35"':''} stroke-linejoin="round"/>`;
+    return W+hx(70,62)+hx(115,62)+`<text x="92" y="122" text-anchor="middle" font-size="12">C₁₀H₈</text>`+hx(205,62,1)+hx(250,62,1)+
+      `<g stroke="#93a1b4" stroke-width="2" stroke-dasharray="2 4"><line x1="142" y1="44" x2="178" y2="44"/><line x1="142" y1="62" x2="178" y2="62"/><line x1="142" y1="80" x2="178" y2="80"/></g><text x="160" y="22" text-anchor="middle" font-size="11" fill="#5b6878">${J('弱いファンデルワールス力','weak van der Waals')}</text><text x="292" y="122" text-anchor="end" font-size="11" fill="#5b6878">${J('平面形・無極性','flat · nonpolar')}</text>`+E}
+  if(id==='etano')return W+`<text x="18" y="54" font-size="22" font-family="Chakra Petch">H₃C — CH₂ — </text><text x="168" y="54" font-size="22" font-family="Chakra Petch" fill="#0072CE">O — H</text><text x="174" y="28" font-size="12" fill="#0072CE">δ−</text><text x="236" y="28" font-size="12" fill="#5b6878">δ+</text>
+    <line x1="238" y1="62" x2="196" y2="96" stroke="#0072CE" stroke-width="3" stroke-dasharray="5 4"/><text x="168" y="118" font-size="20" font-family="Chakra Petch" fill="#0072CE">O</text><text x="186" y="118" font-size="14" font-family="Chakra Petch" fill="#5b6878">(${J('となりの分子','next molecule')})</text><text x="252" y="88" font-size="12" fill="#0072CE">${J('水素結合','H-bond')}</text><rect x="160" y="30" width="96" height="34" rx="10" fill="none" stroke="#0072CE" stroke-width="2"/><text x="208" y="78" text-anchor="middle" font-size="10" fill="#0072CE">${J('ヒドロキシ基','hydroxy group')}</text>`+E;
+  if(id==='eteru')return W+`<text x="150" y="58" text-anchor="middle" font-size="22" font-family="Chakra Petch">C₂H₅ — O — C₂H₅</text><text x="150" y="30" text-anchor="middle" font-size="12" fill="#5b6878">${J('OにHがついていない','no H on the O')}</text>
+    <line x1="150" y1="70" x2="150" y2="104" stroke="#93a1b4" stroke-width="3" stroke-dasharray="5 4"/><path d="M138 80 L162 96 M162 80 L138 96" stroke="#ff6178" stroke-width="4" stroke-linecap="round"/><text x="150" y="124" text-anchor="middle" font-size="12" fill="#ff6178">${J('分子どうしで水素結合できない','cannot H-bond with each other')}</text>`+E;
+  if(id==='nitro')return W+`<g stroke="#04060a" stroke-width="4"><line x1="112" y1="56" x2="188" y2="56"/><line x1="112" y1="66" x2="188" y2="66"/><line x1="112" y1="76" x2="188" y2="76"/></g>${atom(108,66,26,'#dce8f6','N')}${atom(192,66,26,'#dce8f6','N')}<text x="150" y="120" text-anchor="middle" font-size="12" fill="#5b6878">${J('三重結合・無極性分子','triple bond · nonpolar')}</text><text x="150" y="22" text-anchor="middle" font-size="12" fill="#0072CE">${J('沸点 −196℃','bp −196 °C')}</text>`+E;
+  if(id==='dora')return W+`<g stroke="#04060a" stroke-width="4"><line x1="92" y1="56" x2="132" y2="56"/><line x1="92" y1="68" x2="132" y2="68"/><line x1="168" y1="56" x2="208" y2="56"/><line x1="168" y1="68" x2="208" y2="68"/></g>${atom(80,62,22,'#fff','O')}${atom(150,62,20,'#1a2028','C','#fff')}${atom(220,62,22,'#fff','O')}
+    <g stroke="#0072CE" stroke-width="3" fill="#0072CE"><line x1="140" y1="24" x2="96" y2="24"/><path d="M96 18 L84 24 L96 30Z"/><line x1="160" y1="24" x2="204" y2="24"/><path d="M204 18 L216 24 L204 30Z"/></g><text x="150" y="112" text-anchor="middle" font-size="12" fill="#0072CE">${J('かたよりが打ち消し合う → 無極性','dipoles cancel → nonpolar')}</text><text x="150" y="127" text-anchor="middle" font-size="10" fill="#5b6878">${J('直線形','linear')}</text>`+E;
+  if(id==='boss'){const pil=(x,b)=>`<path d="M${x} 104 Q${x+(b||0)*.4} 70 ${x+(b||0)} 40" stroke="#04060a" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+    return '<svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" '+FIGSTYLE+'>'+`<rect x="4" y="4" width="140" height="142" rx="12" fill="#fff"/><rect x="156" y="4" width="140" height="142" rx="12" fill="#fff"/>
+      <text x="74" y="22" text-anchor="middle" font-size="11">${J('液体で乾かすと…','Drying with a liquid')}</text>${pil(34,10)}${pil(58,-8)}${pil(90,8)}${pil(114,-10)}<path d="M40 70 Q49 82 52 70" stroke="#0072CE" stroke-width="3" fill="#9cc8ff"/><path d="M96 70 Q102 82 106 70" stroke="#0072CE" stroke-width="3" fill="#9cc8ff"/><rect x="16" y="104" width="116" height="8" fill="#04060a"/><text x="74" y="134" text-anchor="middle" font-size="11" fill="#ff6178">${J('表面張力で倒れる','surface tension pulls them over')}</text>
+      <text x="226" y="22" text-anchor="middle" font-size="11">${J('超臨界CO₂なら','With supercritical CO₂')}</text>${pil(186)}${pil(210)}${pil(242)}${pil(266)}<g fill="#4aa3ff"><circle cx="198" cy="60" r="3"/><circle cx="226" cy="76" r="3"/><circle cx="254" cy="54" r="3"/><circle cx="200" cy="90" r="2.4"/><circle cx="252" cy="88" r="2.4"/><circle cx="226" cy="46" r="2.4"/></g><rect x="168" y="104" width="116" height="8" fill="#04060a"/><text x="226" y="134" text-anchor="middle" font-size="11" fill="#0072CE">${J('液面がないので倒れない','no surface, no collapse')}</text>`+E}
+  return ''}
+function prof(id){
+  if(id==='mizu')return{tags:[[J('極性分子','polar'),'b'],[J('水素結合あり','hydrogen bonds'),'b'],[J('融点 0℃','mp 0 °C'),'w'],[J('沸点 100℃','bp 100 °C'),'w'],[J('分子量 18','M 18'),'w']],
+    facts:J(['折れ線形の極性分子。O原子がわずかに負（δ−）、H原子がわずかに正（δ+）に帯びている。','分子どうしが水素結合で強く引き合うので、分子量18と小さいのに沸点は100℃と高い。','氷は水素結合ですき間の多い結晶をつくる。だから氷は水に浮き、状態図の融解曲線は左上がりになる。','蒸発熱は41 kJ/molと大きい。汗が蒸発すると体が冷えるのはこのため。'],['A bent, polar molecule: the O atom is slightly negative (δ−) and the H atoms slightly positive (δ+).','Strong hydrogen bonds between molecules give it a high boiling point (100 °C) even though its molecular mass is only 18.','In ice, hydrogen bonds build an open crystal with lots of space. That is why ice floats and why water’s melting curve leans left.','Its heat of vaporization is large (41 kJ/mol). That is why evaporating sweat cools you down.']),
+    link:J('<b>ステージ1</b>で温度が止まった0℃と100℃では、熱はぼくらの分子間の引力を切るのに使われていたんだ。','In <b>stage 1</b>, at 0 °C and 100 °C the heat was used to break the attraction between us.')};
+  if(id==='nafu')return{tags:[[J('無極性分子','nonpolar'),''],[J('水素結合なし','no H-bonds'),''],[J('融点 81℃','mp 81 °C'),'w'],[J('昇華しやすい','sublimes easily'),'b'],[J('分子量 128','M 128'),'w']],
+    facts:J(['ベンゼン環が2つつながった平面形の分子。電荷のかたよりがない無極性分子。','分子間にはたらくのは弱いファンデルワールス力だけ。','そのため常温でも固体から直接気体になる（昇華）。防虫剤が少しずつ小さくなるのはこのため。','同じ仲間：ヨウ素 I₂、ドライアイス CO₂ など。'],['A flat molecule of two fused benzene rings, with no uneven charge — nonpolar.','Only weak van der Waals forces act between its molecules.','So even at room temperature it turns straight from solid to gas (sublimation). That is why mothballs slowly shrink.','Same group: iodine (I₂), dry ice (CO₂) and others.']),
+    link:J('<b>ステージ2</b>で軽く引くだけではがれたのは、水素結合がなかったから。','In <b>stage 2</b> I came off with a light pull because there were no hydrogen bonds.')};
+  if(id==='etano')return{tags:[[J('極性分子','polar'),'b'],[J('水素結合あり','hydrogen bonds'),'b'],[J('沸点 78℃','bp 78 °C'),'w'],[J('分子量 46','M 46'),'w']],
+    facts:J(['−OH（ヒドロキシ基）をもつので極性があり、分子どうしで水素結合をつくる。','水素結合をつくれる部分は水より少ないので、沸点は水より低い78℃。同じ温度での蒸気圧は水より大きい。','水とどんな割合でもよく混ざる。消毒用アルコールや燃料に使われる。','蒸発するとき熱をうばうので、手につけるとひんやりする。'],['Its −OH (hydroxy) group makes it polar, so its molecules form hydrogen bonds.','It has fewer places to hydrogen-bond than water, so it boils lower (78 °C) and has a higher vapor pressure at the same temperature.','It mixes with water in any ratio. Used as hand sanitizer and fuel.','It takes heat as it evaporates, so it feels cool on your skin.']),
+    link:J('<b>ステージ5</b>の蒸気圧曲線で、エタノールが水より上にあったのはこのため。','That is why ethanol’s curve sat above water’s in <b>stage 5</b>.')};
+  if(id==='eteru')return{tags:[[J('水素結合なし','no H-bonds'),''],[J('沸点 34℃','bp 34 °C'),'w'],[J('分子量 74','M 74'),'w'],[J('とても蒸発しやすい','very volatile'),'b']],
+    facts:J(['2つのエチル基がO原子でつながった分子。O原子にHが結合していないので、分子どうしで水素結合をつくれない。','分子量74とエタノール（46）より大きいのに、沸点はずっと低い34℃。水素結合の有無が沸点を大きく変える例。','とても蒸発しやすく、蒸気は引火しやすいので火気厳禁。昔は麻酔薬に使われた。','水にはあまり溶けず、有機物を溶かし出す溶媒（抽出）に使われる。'],['Two ethyl groups joined by an O atom. No H is bonded to the O, so its molecules cannot hydrogen-bond with each other.','Its molecular mass (74) is larger than ethanol’s (46), yet it boils far lower (34 °C) — hydrogen bonding makes the difference.','Very volatile and its vapor catches fire easily — keep flames away. It was once used as an anesthetic.','It barely dissolves in water and is used as a solvent to extract organic substances.']),
+    link:J('20℃でも蒸気圧は約0.59×10⁵ Pa。<b>ステージ5</b>で、たった34℃で沸騰したよ。','Even at 20 °C my vapor pressure is about 0.59×10⁵ Pa. In <b>stage 5</b> I boiled at just 34 °C.')};
+  if(id==='nitro')return{tags:[[J('無極性分子','nonpolar'),''],[J('水素結合なし','no H-bonds'),''],[J('沸点 −196℃','bp −196 °C'),'w'],[J('分子量 28','M 28'),'w']],
+    facts:J(['2つのN原子が三重結合でかたく結びついた分子。とても安定で反応しにくい。','無極性で分子間力が非常に弱いので、沸点は−196℃。常温では気体。','空気の体積の約78%を占める。','液体窒素は、食品の急速冷凍、細胞の保存、超伝導の実験などの冷却に使われる。'],['Two N atoms locked together by a triple bond — very stable and unreactive.','Nonpolar with very weak intermolecular forces, so it boils at −196 °C and is a gas at room temperature.','About 78% of air by volume.','Liquid nitrogen is used for flash-freezing food, storing cells and cooling superconductors.']),
+    link:J('<b>ステージ1</b>の冷却は液体窒素のイメージ。<b>ステージ5</b>の山の空気も、ほとんどがオレたちだ。','The cooling in <b>stage 1</b> is liquid nitrogen. The mountain air in <b>stage 5</b> is mostly us.')};
+  if(id==='dora')return{tags:[[J('無極性分子','nonpolar'),''],[J('直線形','linear'),'w'],[J('昇華点 −78.5℃','sublimes −78.5 °C'),'b'],[J('臨界点 31℃・73.8×10⁵Pa','critical 31 °C · 73.8×10⁵ Pa'),'w']],
+    facts:J(['O=C=O の直線形。C=O結合には極性があるが、左右で打ち消し合うので分子全体は無極性。','三重点の圧力（5.15×10⁵ Pa）が大気圧より高いので、大気圧では液体にならずに昇華する（ドライアイス）。','臨界点が31℃・73.8×10⁵ Pa と比較的おだやかな条件なので、超臨界流体として産業で最もよく使われる。','消火器、炭酸飲料、植物の光合成の原料にもなる。'],['A linear O=C=O molecule. Each C=O bond is polar, but they cancel out, so the molecule is nonpolar.','Its triple-point pressure (5.15×10⁵ Pa) is above atmospheric pressure, so at normal pressure it sublimes instead of melting (dry ice).','Its critical point (31 °C, 73.8×10⁵ Pa) is fairly mild, which makes it the most widely used supercritical fluid in industry.','Also found in fire extinguishers and fizzy drinks, and plants use it for photosynthesis.']),
+    link:J('<b>ステージ6</b>で、どれだけ押しても固体のままだったのは、オレの融解曲線が右上がりだからさ。','In <b>stage 6</b> I stayed solid however hard you pressed, because my melting curve leans right.')};
+  return null}
+function bossProf(){return `
+  <div class="ptitle">${J('超臨界流体ってなに？','What is a supercritical fluid?')}</div>
+  <p>${J('臨界点（CO₂なら31℃・73.8×10⁵ Pa）をこえると、液体と気体の区別がなくなる。それが超臨界流体。温度や圧力を少し変えるだけで、性質を大きく調節できる。','Past the critical point (for CO₂: 31 °C, 73.8×10⁵ Pa), liquid and gas can no longer be told apart. That is a supercritical fluid. Small changes in temperature or pressure tune its properties a lot.')}</p>
+  <div class="props"><div><b>${J('液体のように','Like a liquid')}</b>${J('物をよく溶かす','dissolves things well')}</div><div><b>${J('気体のように','Like a gas')}</b>${J('すき間にすっと入りこむ','slips into tiny gaps')}</div><div><b>${J('液面がない','No surface')}</b>${J('表面張力がはたらかない','no surface tension')}</div></div>
+  <div class="ptitle">${J('産業の現場で活躍中','At work in industry')}</div>
+  <div class="pfig">${profFig('boss')}</div>
+  <div class="icards">
+   <div class="icard"><h4><i>01</i>${J('半導体・ナノテクノロジー','Semiconductors & nanotech')}</h4><p>${J('スマホやパソコンのチップの回路は、髪の毛の数千分の1ほどの細さ。洗ったあと液体で乾かすと、表面張力で細い柱どうしが引っぱられて倒れてしまう。表面張力がない超臨界CO₂で洗浄・乾燥すれば、細かいパターンを壊さずに仕上げられる。センサーなどの微小な部品（MEMS）づくりにも使われる。','Chip circuits in phones and computers are thousands of times thinner than a hair. If they are dried with a liquid after washing, surface tension pulls the tiny structures together and they collapse. Supercritical CO₂ has no surface tension, so it can clean and dry them without damage. It is also used to make micro-machines (MEMS) such as sensors.')}</p></div>
+   <div class="icard"><h4><i>02</i>${J('ナノ材料','Nanomaterials')}</h4><p>${J('超臨界の水の中では、金属酸化物のナノ粒子を短時間でつくれる（日本の大学で生まれた技術）。超臨界乾燥でつくるエアロゲルは、体積のほとんどが空気という超軽量の断熱材。','In supercritical water, metal-oxide nanoparticles can be made in moments — a technique developed at a Japanese university. Supercritical drying makes aerogels: ultralight insulators that are mostly air.')}</p></div>
+   <div class="icard"><h4><i>03</i>${J('食品・医薬品','Food & medicine')}</h4><p>${J('コーヒーのカフェイン除去、ビールのホップや香りの成分の抽出、医薬品の分離・精製。CO₂は圧力をもどすと気体になって抜けるので、有害な溶媒が食品に残らない。','Decaffeinating coffee, extracting hop and aroma compounds, and separating and purifying medicines. When the pressure is released, CO₂ simply turns back into gas, so no harmful solvent stays in the food.')}</p></div>
+   <div class="icard"><h4><i>04</i>${J('環境・エネルギー','Environment & energy')}</h4><p>${J('超臨界水は、分解しにくい有害な有機物を短時間で分解する研究や実用化が進む。超臨界CO₂を使った、小型で効率の高い発電の仕組みの実証も行われている。','Supercritical water can break down hard-to-destroy harmful organic substances quickly, and it is being researched and put into use. Compact, efficient power cycles using supercritical CO₂ are also being demonstrated.')}</p></div>
+  </div>
+  <div class="why"><h4>${J('なぜ、世界に超臨界技術が必要なのか','Why the world needs supercritical technology')}</h4>
+   <p>${J('AI、医療機器、自動車、スマホ――今の社会は半導体の上に成り立っている。チップの性能を上げる王道は、回路をもっと細かくすること。でも細かくなるほど、ふだんは気にもしない液体の「表面張力」が、回路を倒す大きな壁になる。液体でも気体でもない超臨界流体は、その壁をこえる方法の一つだ。','AI, medical devices, cars, phones — modern society runs on semiconductors. The main way to make chips better is to make circuits smaller. But the smaller they get, the more something we normally ignore — the surface tension of liquids — becomes a wall that knocks circuits over. A supercritical fluid, neither liquid nor gas, is one way past that wall.')}</p>
+   <p>${J('しかも、有害な有機溶媒の代わりに、回収してくり返し使えるCO₂や水で仕事ができる。教室で学んだ「状態図の右上の世界」は、未来のものづくりと地球環境の両方を支える技術につながっている。','And it does the job with CO₂ or water, which can be collected and reused, instead of harmful organic solvents. The “top-right corner of the phase diagram” you learned in class connects to technology that supports both future manufacturing and the planet.')}</p></div>`}
+function openProf(id){const p=$('#profPanel');const n=PARTY.indexOf(id)+1;Snd.init();Snd.tap();
+  if(!S.allies.has(id)){p.innerHTML=`<button class="pclose" id="pX" aria-label="close">×</button><div class="locked">${charSVG(id)}<h3>${J('まだ なかまになっていない','Not on your team yet')}</h3><p>${id==='boss'?J('すべてのステージをクリアすると…？','Clear every stage and...?'):J(`ステージ${n}をクリアすると なかまになる`,`Clear stage ${n} to recruit`)}</p></div>`}
+  else if(id==='boss'){p.innerHTML=`<button class="pclose" id="pX" aria-label="close">×</button><div class="phead">${charSVG('boss')}<div><div class="pf">scCO₂ ・ ${J('超臨界二酸化炭素','supercritical CO₂')}</div><h3>${cname('boss')}</h3></div></div>
+      <div class="tags"><span class="b">${J('臨界点をこえた状態','beyond the critical point')}</span><span class="w">${J('液体でも気体でもない','neither liquid nor gas')}</span><span>${J('ラスボス','final boss')}</span></div>${bossProf()}<button class="btn" id="pOk">${J('閉じる','Close')}</button>`}
+  else{const d=prof(id);p.innerHTML=`<button class="pclose" id="pX" aria-label="close">×</button><div class="phead">${charSVG(id)}<div><div class="pf">${CH[id].f}</div><h3>${cname(id)}</h3></div></div>
+      <div class="tags">${d.tags.map(t=>`<span class="${t[1]}">${t[0]}</span>`).join('')}</div><div class="pfig">${profFig(id)}</div><ul class="facts">${d.facts.map(f=>`<li>${f}</li>`).join('')}</ul><div class="plink">${d.link}</div><button class="btn" id="pOk">${J('閉じる','Close')}</button>`}
+  const close=()=>{$('#prof').hidden=true;Snd.tap()};$('#pX').onclick=close;const ok=$('#pOk');if(ok)ok.onclick=close;
+  const ov=$('#prof');ov.hidden=false;ov.scrollTop=0;ov.onclick=e=>{if(e.target===ov)close()};p.classList.remove('in');void p.offsetWidth;p.classList.add('in')}
+function bindParty(host){host.querySelectorAll('.slot').forEach(el=>{const id=el.dataset.id;
+  el.onclick=()=>{$('#tip').hidden=true;openProf(id)};
+  el.onpointerenter=e=>{if(e.pointerType!=='mouse')return;const t=$('#tip');const has=S.allies.has(id);t.innerHTML=has?`<b>${cname(id)}</b> ${id==='boss'?'scCO₂':CH[id].f}<br>${J('クリックでくわしく','Click for details')}`:J('？？？ まだ なかまではない','??? not on your team yet');const r=el.getBoundingClientRect();t.hidden=false;t.style.left=Math.min(innerWidth-240,Math.max(8,r.left))+'px';t.style.top=(r.bottom+8)+'px'};
+  el.onpointerleave=()=>{$('#tip').hidden=true}})}
+
 /* ================= FLOW ================= */
 function clearStage(){scene.remove(G);G.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material){[].concat(o.material).forEach(m=>{if(m.map&&m.map!==FACE&&m.map!==FACE_DARK&&!Object.values(CTEX).includes(m.map))m.map.dispose();m.dispose()})}});
   LS.forEach(s=>{s.userData.L.ja.map.dispose();s.userData.L.en.map.dispose()});LS.length=0;
@@ -1276,7 +1386,7 @@ function loadStage(n){clearStage();S.stage=n;const d=STAGES[n-1];S.cur=d;d.st={}
 function headerUI(){const n=S.stage,d=S.cur;if(!d)return;$('#stgNo').textContent=`STAGE ${n}`;$('#stgTitle').textContent=d.title;$('#pips').innerHTML=STAGES.map((s,i)=>`<i class="${i+1<n?'on':i+1===n?'now':''}"></i>`).join('')}
 function toTitle(){S.paused=true;$('#hud').hidden=true;$('#intro').hidden=true;$('#gate').hidden=true;closeCele();cv.classList.remove('frozen');clearStage();S.cur=null;buildTitle();$('#title').hidden=false;titleScene()}
 function buildTitle(){$('#ttlP').textContent=J('分子のサイズになって、物質の三態の世界へ。ステージをクリアするたびに、ライバルの分子が仲間になる。最後に待つのは…？','Shrink to the size of a molecule and dive into the states of matter. Each stage you clear, a rival molecule joins your team. And at the very end...?');
-  $('#partyLab').textContent=J('なかま','Team');$('#partyCnt').textContent=`${[...S.allies].filter(a=>PARTY.includes(a)).length} / ${PARTY.length}`;$('#tparty').innerHTML=partyHTML(null);
+  $('#partyLab').textContent=J('なかま（タップで図鑑）','Team (tap for profiles)');$('#partyCnt').textContent=`${[...S.allies].filter(a=>PARTY.includes(a)).length} / ${PARTY.length}`;$('#tparty').innerHTML=partyHTML(null);bindParty($('#tparty'));
   $('#startBtn').innerHTML=J('スタート<small>音が出ます</small>','START<small>sound on</small>');
   $('#stsel').innerHTML=STAGES.map((s,i)=>`<button data-n="${i+1}" ${i+1>S.unlocked?'disabled':''}>${i+1}<small>${s.short}</small></button>`).join('');
   $('#stsel').querySelectorAll('button').forEach(b=>b.onclick=()=>{Snd.init();Snd.tap();go(+b.dataset.n)});
