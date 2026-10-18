@@ -217,6 +217,49 @@ button:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
 .stats span{font-size:11px;color:var(--mute)}
 .burst{position:fixed;inset:0;pointer-events:none;z-index:30;width:100%;height:100%}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+/* ===== Estonian white-forward theme ===== */
+:root{--paper:#ffffff;--ink-t:#04060a;--mute2:#5b6878;--line2:rgba(4,6,10,.13)}
+.top{background:var(--paper);color:var(--ink-t);border-radius:16px;padding:5px 5px 5px 12px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.top h1{color:var(--ink-t)}.stg{color:var(--blue)}
+.pips i{background:#d5dde7}.pips i.on{background:var(--ink-t)}.pips i.now{background:var(--blue)}
+.icon{background:var(--paper);border:1.5px solid var(--line2);color:var(--ink-t)}
+.top .icon{width:38px;height:38px}
+#coach{box-shadow:0 10px 30px rgba(0,0,0,.45),inset 0 0 0 2px #04060a}
+#chartCard{background:var(--paper);border:0;box-shadow:0 8px 24px rgba(0,0,0,.35);color:var(--ink-t);backdrop-filter:none;-webkit-backdrop-filter:none}
+#chartCard .lab,.legend{color:var(--mute2)}
+.ro{background:var(--paper);border:0;box-shadow:0 6px 18px rgba(0,0,0,.4);backdrop-filter:none;-webkit-backdrop-filter:none}
+.ro .k{color:var(--mute2)}.ro .v{color:var(--ink-t)}.ro .v small{color:var(--mute2)}
+.ro.hot{background:var(--blue);box-shadow:0 0 0 3px #fff,0 0 24px rgba(74,163,255,.7)}.ro.hot .k,.ro.hot .v,.ro.hot .v small{color:#fff}
+.bal,.gauge{background:var(--paper);border:0;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.bal .cap{color:var(--ink-t)}
+.bal.near{box-shadow:0 0 0 4px var(--blue2),0 0 30px rgba(74,163,255,.7)}
+.bubble{background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.panel{background:var(--paper);color:var(--ink-t);border:0;box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 6px 0 var(--blue)}
+.panel h3{color:var(--ink-t)}.panel p{color:#2a3442}.bigno{color:var(--blue)}
+.todo li{background:#eef4fb;border-color:#cfe0f3;color:var(--ink-t)}.todo li::before{background:var(--ink-t);color:#fff}
+.howto{color:var(--mute2)}
+.btn.ghost{background:#fff;color:var(--ink-t);box-shadow:inset 0 0 0 2.5px var(--ink-t),0 6px 0 var(--ink-t)}
+.btn.ghost:active{box-shadow:inset 0 0 0 2.5px var(--ink-t),0 2px 0 var(--ink-t)}
+.btn:disabled{background:#e6ebf1;color:#8794a5;box-shadow:0 6px 0 #c9d2dc}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#title{background:#fff;color:var(--ink-t)}
+.ttl h2{color:var(--ink-t)}.ttl p{color:#2a3442}.ttl .kicker{color:var(--blue)}
+.cast figcaption{color:var(--ink-t)}.cast figcaption small{color:var(--mute2)}
+.stsel button{background:#fff;border:2px solid var(--ink-t);color:var(--ink-t)}.stsel button small{color:var(--mute2)}
+#title .flag{width:120px;height:14px;box-shadow:0 0 0 2px #04060a}
+#gate{background:var(--paper);color:var(--ink-t)}
+.gtag{background:var(--ink-t);color:#fff}
+.gprog i{background:#d5dde7}.gprog i.on{background:var(--blue)}.gprog i.now{background:var(--ink-t)}
+.gchart{background:#04060a;border:0}
+.gnote{color:var(--mute2)}.gnote b{color:var(--ink-t)}
+.gq p{color:var(--ink-t)}
+.ch{background:#fff;border:2px solid #cdd6e1;color:var(--ink-t);box-shadow:0 3px 0 #cdd6e1}
+.ch i{background:#eef2f7}
+.ch.ok{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 4px rgba(74,163,255,.35)}
+.gex{color:var(--ink-t)}.gex.hint{background:#fff1f3;border-color:#ffb3c0}.gex.good{background:#e8f2fd;border-color:#9cc8f5}
+.gfoot{border-top-color:var(--line2)}
+.stats div{background:#f1f5fa;border:0}.stats span{color:var(--mute2)}
 @media (min-width:760px){#coach,#talk,#readouts,#extra{max-width:640px;width:100%;margin-left:auto;margin-right:auto}}
 </style>
 </head>
@@ -293,19 +336,27 @@ const CH={
   mizu:{name:'しずくまる',f:'H₂O'}, dora:{name:'ドラポン',f:'CO₂'}, etano:{name:'エタのん',f:'C₂H₅OH'},
   eteru:{name:'エテルン',f:'C₂H₅OC₂H₅'}, nitro:{name:'ちっそん',f:'N₂'}, nafu:{name:'ナフくん',f:'C₁₀H₈'}
 };
-function face(x,y,k=1,eye='#0a0d12',hl='#fff'){
-  return `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cx="-11" cy="-2" rx="4.4" ry="5.8" fill="${eye}"/><ellipse cx="11" cy="-2" rx="4.4" ry="5.8" fill="${eye}"/><circle cx="-9.4" cy="-4.2" r="1.6" fill="${hl}"/><circle cx="12.6" cy="-4.2" r="1.6" fill="${hl}"/><path d="M-4.5 6 q2.2 3.2 4.5 0 q2.2 3.2 4.5 0" stroke="${eye}" stroke-width="2.2" fill="none" stroke-linecap="round"/><ellipse cx="-19.5" cy="6" rx="5.5" ry="3.2" fill="#ff9fb8" opacity=".6"/><ellipse cx="19.5" cy="6" rx="5.5" ry="3.2" fill="#ff9fb8" opacity=".6"/></g>`;
-}
-const shine=(x,y,r)=>`<ellipse cx="${x-r*.38}" cy="${y-r*.42}" rx="${r*.32}" ry="${r*.2}" transform="rotate(-30 ${x-r*.38} ${y-r*.42})" fill="#fff" opacity=".45"/>`;
+const INK='#04060a',OL=`stroke="${INK}" stroke-width="3" stroke-linejoin="round"`;
+function eye(x,y,s,tilt,ink,lid=0){return `<g transform="translate(${x} ${y}) rotate(${tilt}) scale(${s})"><path d="M-9 ${lid} A9 ${7.5-lid*.6} 0 0 0 9 ${lid}Z" fill="#fff" stroke="${INK}" stroke-width="2.2"/><circle cx="1.8" cy="${3+lid*.6}" r="3.1" fill="${INK}"/><path d="M-11.5 ${lid-.5} H11.5" stroke="${ink}" stroke-width="3.6" stroke-linecap="round"/><path d="M-6 10.5 q6 3 12 0" stroke="${ink}" stroke-opacity=".5" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M-5 13.5 q5 2 10 0" stroke="${ink}" stroke-opacity=".3" stroke-width="1.3" fill="none" stroke-linecap="round"/></g>`}
+const MOUTH={
+  tooth:i=>`<path d="M-10 0 q5 -4 10 -1 q5 3 9 -2" stroke="${i}" stroke-width="2.8" fill="none" stroke-linecap="round"/><rect x="-3.5" y="-1.6" width="6" height="6" rx="1.2" fill="#fff" stroke="${INK}" stroke-width="1.7"/>`,
+  lips:i=>`<path d="M-11 0 q11 -7 22 0 q-11 8 -22 0Z" fill="#f4f7fb" stroke="${INK}" stroke-width="2.2"/><path d="M-10 0 H10" stroke="${INK}" stroke-width="1.5"/>`,
+  drool:i=>`<path d="M-8 -2 q8 10 16 0 q-8 2 -16 0Z" fill="${INK}" stroke="${INK}" stroke-width="1.5" stroke-linejoin="round"/><path d="M5 3.5 q2.6 6 0 9.5 q-2.6 -3.5 0 -9.5Z" fill="#9cc8ff" stroke="${INK}" stroke-width="1.3"/>`,
+  tongue:i=>`<path d="M-9 0 q9 3 18 0" stroke="${i}" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M-1 1.5 v5 a3.6 3.6 0 0 0 7.2 0 v-5" fill="#9cc8ff" stroke="${INK}" stroke-width="1.7"/>`,
+  stache:i=>`<path d="M-13 -1 q6.5 6 13 0 q6.5 6 13 0" stroke="${i}" stroke-width="3.8" fill="none" stroke-linecap="round"/><path d="M-3 7 q3 -1.5 6 0" stroke="${i}" stroke-width="2" fill="none" stroke-linecap="round"/>`,
+  flat:i=>`<path d="M-10 0 H5 l4 -2.5" stroke="${i}" stroke-width="2.8" fill="none" stroke-linecap="round"/><path d="M-6 3 v2" stroke="${i}" stroke-width="1.6" stroke-linecap="round"/>`};
+function face(x,y,k,m,ink=INK,lid=0){return `<g transform="translate(${x} ${y}) scale(${k})">${eye(-12,-2,1,-7,ink,lid)}${eye(12.5,-3.5,1.2,9,ink,lid)}<g transform="translate(0 14)">${MOUTH[m](ink)}</g></g>`}
+const sweat=(x,y)=>`<path d="M${x} ${y} q4.5 6.5 0 10 q-4.5 -3.5 0 -10Z" fill="#9cc8ff" stroke="${INK}" stroke-width="1.6"/>`;
+const shine=(x,y,r)=>`<ellipse cx="${x-r*.42}" cy="${y-r*.46}" rx="${r*.22}" ry="${r*.12}" transform="rotate(-30 ${x-r*.42} ${y-r*.46})" fill="#fff" opacity=".55"/>`;
 function hexPath(cx,cy,r){let d='';for(let i=0;i<6;i++){const a=Math.PI/3*i+Math.PI/6;d+=(i?'L':'M')+(cx+r*Math.cos(a)).toFixed(1)+' '+(cy+r*Math.sin(a)).toFixed(1)}return d+'Z'}
 function charSVG(id){
   let b='';
-  if(id==='mizu') b=`<circle cx="-27" cy="-29" r="14" fill="#f4f7fb"/><circle cx="27" cy="-29" r="14" fill="#f4f7fb"/><circle cx="0" cy="6" r="38" fill="#0072CE"/>${shine(0,6,38)}${face(0,10)}`;
-  if(id==='dora') b=`<circle cx="-34" cy="6" r="24" fill="#f4f7fb"/><circle cx="34" cy="6" r="24" fill="#f4f7fb"/><circle cx="0" cy="6" r="31" fill="#1a2028" stroke="#3a4656" stroke-width="2"/>${shine(0,6,31)}${face(0,9,.85,'#f4f7fb','#1a2028')}`;
-  if(id==='etano') b=`<circle cx="-30" cy="14" r="17" fill="#dfe8f3"/><circle cx="35" cy="-21" r="15" fill="#0072CE"/><circle cx="47" cy="-35" r="8" fill="#f4f7fb"/><circle cx="0" cy="8" r="34" fill="#f4f7fb"/>${shine(0,8,34)}${face(0,12,.92)}`;
-  if(id==='eteru') b=`<path d="M-42 40 q6 -6 12 0 t12 0" stroke="#4aa3ff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/><path d="M18 44 q6 -6 12 0 t12 0" stroke="#4aa3ff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/><circle cx="0" cy="-30" r="12" fill="#0072CE"/><ellipse cx="0" cy="4" rx="47" ry="32" fill="#b9d4f1"/>${shine(0,4,36)}${face(0,8,.95)}`;
-  if(id==='nitro') b=`<circle cx="-17" cy="4" r="31" fill="#dce8f6"/><circle cx="17" cy="4" r="31" fill="#dce8f6"/>${shine(-6,4,40)}<path d="M-44 -30 l6 6 m0 -6 l-6 6 M40 -34 l5 5 m0 -5 l-5 5 M48 24 l4 4 m0 -4 l-4 4" stroke="#4aa3ff" stroke-width="2.4" stroke-linecap="round"/>${face(0,8)}`;
-  if(id==='nafu') b=`<path d="${hexPath(-22,6,28)}" fill="#f4f7fb" stroke="#0072CE" stroke-width="4" stroke-linejoin="round"/><path d="${hexPath(22,6,28)}" fill="#f4f7fb" stroke="#0072CE" stroke-width="4" stroke-linejoin="round"/>${face(0,8,.9)}`;
+  if(id==='mizu') b=`<circle cx="-28" cy="-27" r="13" fill="#f4f7fb" ${OL}/><circle cx="29" cy="-30" r="11" fill="#f4f7fb" ${OL}/><path d="M-38 10 C-40 -22 -18 -34 2 -32 C26 -31 41 -14 39 10 C37 34 20 45 0 44 C-22 44 -37 33 -38 10Z" fill="#0072CE" ${OL}/><path d="M-2 -32 q-3 -10 5 -12 q4 4 -2 6" stroke="${INK}" stroke-width="2.4" fill="none" stroke-linecap="round"/>${shine(0,6,38)}${face(0,8,1,'tooth')}${sweat(31,-12)}`;
+  if(id==='dora') b=`<circle cx="-35" cy="8" r="22" fill="#f4f7fb" ${OL}/><circle cx="36" cy="5" r="20" fill="#f4f7fb" ${OL}/><path d="M-30 8 C-31 -16 -14 -26 2 -25 C20 -24 32 -12 31 8 C30 28 16 38 0 37 C-17 37 -30 27 -30 8Z" fill="#1a2028" ${OL}/>${shine(0,6,31)}${face(0,6,.85,'lips','#f4f7fb')}<g fill="#f4f7fb" opacity=".7"><circle cx="-10" cy="30" r="1.1"/><circle cx="-5" cy="32" r="1.1"/><circle cx="6" cy="32" r="1.1"/><circle cx="11" cy="30" r="1.1"/></g>`;
+  if(id==='etano') b=`<circle cx="-31" cy="16" r="15" fill="#dfe8f3" ${OL}/><path d="M24 -16 L33 -24" stroke="${INK}" stroke-width="3"/><circle cx="36" cy="-26" r="12" fill="#0072CE" ${OL}/><circle cx="47" cy="-38" r="6.5" fill="#f4f7fb" ${OL}/><path d="M-33 8 C-34 -18 -16 -27 1 -26 C20 -25 35 -12 33 9 C31 31 16 42 -1 41 C-19 41 -32 30 -33 8Z" fill="#f4f7fb" ${OL}/>${shine(0,8,34)}${face(0,10,.92,'drool')}`;
+  if(id==='eteru') b=`<path d="M-44 44 q6 -6 12 0 t12 0" stroke="#4aa3ff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M18 47 q6 -6 12 0 t12 0" stroke="#4aa3ff" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="2" cy="-31" r="11" fill="#0072CE" ${OL}/><path d="M-48 6 C-48 -18 -24 -27 2 -27 C28 -27 48 -16 47 6 C46 28 26 37 0 37 C-27 37 -48 28 -48 6Z" fill="#b9d4f1" ${OL}/>${shine(0,4,36)}${face(0,4,.95,'tongue',INK,2.6)}`;
+  if(id==='nitro') b=`<circle cx="-17" cy="6" r="31" fill="#dce8f6" ${OL}/><circle cx="18" cy="2" r="30" fill="#dce8f6" ${OL}/><circle cx="-17" cy="6" r="29.5" fill="#dce8f6"/><circle cx="18" cy="2" r="28.5" fill="#dce8f6"/>${shine(-8,4,40)}<path d="M-46 -30 l6 6 m0 -6 l-6 6 M42 -34 l5 5 m0 -5 l-5 5 M50 26 l4 4 m0 -4 l-4 4" stroke="#4aa3ff" stroke-width="2.4" stroke-linecap="round"/>${face(0,6,1,'stache')}`;
+  if(id==='nafu') b=`<path d="${hexPath(-22,6,28)}" fill="#f4f7fb" stroke="#0072CE" stroke-width="4" stroke-linejoin="round"/><path d="${hexPath(22,6,28)}" fill="#f4f7fb" stroke="#0072CE" stroke-width="4" stroke-linejoin="round"/><path d="M-26 -10 q14 -7 28 0 q12 -6 22 -1" stroke="${INK}" stroke-width="4" fill="none" stroke-linecap="round"/>${face(0,8,.9,'flat')}${sweat(-38,-14)}`;
   return `<svg viewBox="-60 -60 120 120" width="240" height="240" xmlns="http://www.w3.org/2000/svg" aria-label="${CH[id].name}">${b}</svg>`;
 }
 
@@ -347,9 +398,9 @@ scene.add(new THREE.HemisphereLight(0xffffff,0x0a2a55,.9));
 const dl=new THREE.DirectionalLight(0xffffff,.7);dl.position.set(4,10,6);scene.add(dl);
 const grid=new THREE.GridHelper(90,90,0x0b4f99,0x0c1d33);scene.add(grid);
 let G=new THREE.Group();scene.add(G);
-function makeFaceTex(bg,eye){const c=document.createElement('canvas');c.width=256;c.height=128;const x=c.getContext('2d');x.fillStyle=bg;x.fillRect(0,0,256,128);x.fillStyle=eye;
-  x.beginPath();x.ellipse(53,57,5,7.5,0,0,7);x.fill();x.beginPath();x.ellipse(75,57,5,7.5,0,0,7);x.fill();
-  x.strokeStyle=eye;x.lineWidth=3;x.lineCap='round';x.beginPath();x.moveTo(59,70);x.quadraticCurveTo(61.5,75,64,70);x.quadraticCurveTo(66.5,75,69,70);x.stroke();
+function makeFaceTex(bg,eye){const c=document.createElement('canvas');c.width=256;c.height=128;const x=c.getContext('2d');x.fillStyle=bg;x.fillRect(0,0,256,128);x.fillStyle=eye;x.strokeStyle=eye;x.lineCap='round';
+  [[52,56,5.2,-.12],[76,55,6.4,.16]].forEach(([cx,cy,r,t])=>{x.save();x.translate(cx,cy);x.rotate(t);x.beginPath();x.ellipse(1,0,r,r*.8,0,0,Math.PI);x.fill();x.lineWidth=3.2;x.beginPath();x.moveTo(-r-2.5,-.5);x.lineTo(r+2.5,-.5);x.stroke();x.globalAlpha=.4;x.lineWidth=1.4;x.beginPath();x.moveTo(-r*.7,r+3);x.quadraticCurveTo(0,r+5,r*.7,r+3);x.stroke();x.restore()});
+  x.lineWidth=2.6;x.beginPath();x.moveTo(57,72);x.quadraticCurveTo(61,68.5,64,71);x.quadraticCurveTo(67,73.5,71,70);x.stroke();x.fillStyle=bg;x.fillRect(61.5,70.5,3.5,3.5);x.strokeStyle=eye;x.lineWidth=1.2;x.strokeRect(61.5,70.5,3.5,3.5);
   const t=new THREE.CanvasTexture(c);t.anisotropy=4;return t}
 const FACE=makeFaceTex('#ffffff','#0a0d12'),FACE_DARK=makeFaceTex('#252d39','#f4f7fb');
 const M4=new THREE.Matrix4(),V1=new THREE.Vector3(),V2=new THREE.Vector3(),ONE=new THREE.Vector3(1,1,1),EL=new THREE.Vector3(),ER=new THREE.Vector3(),QI=new THREE.Quaternion();
@@ -470,18 +521,19 @@ function hudChart(cfg){const c=$('#chart');const dpr=Math.min(2,devicePixelRatio
   if(c.width!==Math.round(w*dpr)||c.height!==Math.round(h*dpr)){c.width=Math.round(w*dpr);c.height=Math.round(h*dpr)}
   const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,w,h);
   const m={l:30,r:6,t:6,b:15};const sx=v=>m.l+(v-cfg.x0)/(cfg.x1-cfg.x0)*(w-m.l-m.r),sy=v=>h-m.b-(v-cfg.y0)/(cfg.y1-cfg.y0)*(h-m.t-m.b);
-  x.font='500 9px "Chakra Petch",monospace';x.fillStyle='#93a1b4';x.strokeStyle='rgba(244,247,251,.08)';x.lineWidth=1;
+  x.font='600 9px "Chakra Petch",monospace';x.fillStyle='#5b6878';x.strokeStyle='rgba(4,6,10,.08)';x.lineWidth=1;
   (cfg.yt||[]).forEach(v=>{x.beginPath();x.moveTo(m.l,sy(v));x.lineTo(w-m.r,sy(v));x.stroke();x.textAlign='right';x.fillText(cfg.yf?cfg.yf(v):v,m.l-3,sy(v)+3)});
   (cfg.xt||[]).forEach(v=>{x.textAlign='center';x.fillText(cfg.xf?cfg.xf(v):v,sx(v),h-3)});
-  x.strokeStyle='rgba(244,247,251,.35)';x.beginPath();x.moveTo(m.l,m.t);x.lineTo(m.l,h-m.b);x.lineTo(w-m.r,h-m.b);x.stroke();
+  x.strokeStyle='rgba(4,6,10,.45)';x.beginPath();x.moveTo(m.l,m.t);x.lineTo(m.l,h-m.b);x.lineTo(w-m.r,h-m.b);x.stroke();
   (cfg.hl||[]).forEach(l=>{x.setLineDash([4,3]);x.strokeStyle=l.c;x.lineWidth=1.2;x.beginPath();x.moveTo(m.l,sy(l.v));x.lineTo(w-m.r,sy(l.v));x.stroke();x.setLineDash([]);if(l.t){x.fillStyle=l.c;x.textAlign='right';x.fillText(l.t,w-m.r-2,sy(l.v)-3)}});
   x.save();x.beginPath();x.rect(m.l,m.t-2,w-m.l-m.r,h-m.t-m.b+2);x.clip();
-  (cfg.series||[]).forEach(s=>{if(s.pts.length<1)return;x.strokeStyle=s.c;x.lineWidth=s.w||2;x.globalAlpha=s.a||1;x.lineJoin='round';
+  (cfg.series||[]).forEach(s=>{if(s.pts.length<1)return;s={...s,c:hc(s.c)};x.strokeStyle=s.c;x.lineWidth=s.w||2;x.globalAlpha=s.a||1;x.lineJoin='round';
     if(s.dots){x.fillStyle=s.c;s.pts.forEach(p=>{x.beginPath();x.arc(sx(p[0]),sy(p[1]),1.6,0,7);x.fill()})}
     else{x.beginPath();s.pts.forEach((p,i)=>i?x.lineTo(sx(p[0]),sy(p[1])):x.moveTo(sx(p[0]),sy(p[1])));x.stroke()}x.globalAlpha=1});
   x.restore();
-  if(cfg.pt){const px=sx(cfg.pt[0]),py=sy(clamp(cfg.pt[1],cfg.y0,cfg.y1));x.fillStyle='rgba(74,163,255,.35)';x.beginPath();x.arc(px,py,7,0,7);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(px,py,3.4,0,7);x.fill()}}
-function setChart(label,legend){$('#chartLab').textContent=label||'';$('#legend').innerHTML=(legend||[]).map(l=>`<span style="--c:${l.c}">${l.t}</span>`).join('');$('#chartCard').hidden=!label;$('#chartCard').classList.remove('big')}
+  if(cfg.pt){const px=sx(cfg.pt[0]),py=sy(clamp(cfg.pt[1],cfg.y0,cfg.y1));x.fillStyle='rgba(0,114,206,.25)';x.beginPath();x.arc(px,py,7.5,0,7);x.fill();x.fillStyle='#04060a';x.beginPath();x.arc(px,py,3.6,0,7);x.fill()}}
+const hc=c=>c==='#f4f7fb'?'#04060a':c==='#9cc0ea'?'#7fa6d6':c==='#4aa3ff'?'#0072CE':c;
+function setChart(label,legend){$('#chartLab').textContent=label||'';$('#legend').innerHTML=(legend||[]).map(l=>`<span style="--c:${hc(l.c)}">${l.t}</span>`).join('');$('#chartCard').hidden=!label;$('#chartCard').classList.remove('big')}
 $('#chartCard').addEventListener('click',()=>{Snd.init();Snd.tap();$('#chartCard').classList.toggle('big')});
 
 /* ================= SVG CHARTS FOR GATES ================= */
@@ -644,8 +696,8 @@ function eqTick(dt,sound){EQ.acc+=EQ.e*13.4*dt;
 const STAGES=[];
 function stageClear(){const n=S.stage;S.paused=true;S.cleared.add(n);saveUnlock(n+1);Snd.fanfare();burst();S.hint=null;
   const last=n===STAGES.length;const p=$('#clearPanel');
-  if(!last){p.innerHTML=`<div class="bigno">STAGE ${n} CLEAR</div><h3>${STAGES[n-1].title} クリア！</h3><div class="intro-head">${charSVG(STAGES[n].ch)}<p>次は「${STAGES[n].title}」。${STAGES[n-1].teaser}</p></div><button class="btn" id="nextSt">STAGE ${n+1} へ</button>`;
-    $('#clear').hidden=false;$('#nextSt').onclick=()=>{Snd.whoosh();$('#clear').hidden=true;loadStage(n+1)}}
+  if(!last){p.innerHTML=`<div class="bigno">STAGE ${n} CLEAR</div><h3>${STAGES[n-1].title} クリア！</h3><div class="intro-head">${charSVG(STAGES[n].ch)}<p>次は「${STAGES[n].title}」。${STAGES[n-1].teaser}</p></div><div class="row2"><button class="btn ghost" id="homeSt">ホームへ戻る</button><button class="btn" id="nextSt">STAGE ${n+1} へ</button></div>`;
+    $('#clear').hidden=false;$('#nextSt').onclick=()=>{Snd.whoosh();$('#clear').hidden=true;loadStage(n+1)};$('#homeSt').onclick=()=>{Snd.tap();$('#clear').hidden=true;toTitle()}}
   else{const sec=Math.round((now()-S.start)/1000);
     p.innerHTML=`<div class="bigno">ALL CLEAR</div><h3>状態図マスター！</h3><div class="cast">${Object.keys(CH).map(k=>`<figure>${charSVG(k)}<figcaption>${CH[k].name}</figcaption></figure>`).join('')}</div>
       <div class="stats"><div><b>${S.first}/${S.total}</b><span>一発正解</span></div><div><b>${Math.round(S.first/Math.max(1,S.total)*100)}%</b><span>正答率</span></div><div><b>${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}</b><span>プレイ時間</span></div></div>
@@ -690,7 +742,7 @@ STAGES.push({title:'融解と凝固',ch:'nitro',teaser:'ふたを閉めて、分
     if(S.si===2&&ng===N&&stepDone(2)){setTimeout(()=>gate('GATE 1-2',G1b,stageClear),900)}
     if(S.si===2&&B.level<=0.05)S.hint={at:()=>V1.set(0,-1.9,1.3),g:'up',tip:'上にスワイプ'};else if(S.si===2)S.hint=null},
   draw(){this.mols.draw(this.N,X,Y,Z,null)},
-  chart(){hudChart({x0:0,x1:56,y0:-25,y1:125,yt:[0,100],xt:[0,14,28,42,56],xf:v=>v+'kJ',hl:[{v:0,c:'rgba(244,247,251,.35)'},{v:100,c:'rgba(244,247,251,.35)'}],series:[{pts:this.st.hist,c:'#4aa3ff',w:2.4}],pt:[this.st.Q,this.st.T]})}
+  chart(){hudChart({x0:0,x1:56,y0:-25,y1:125,yt:[0,100],xt:[0,14,28,42,56],xf:v=>v+'kJ',hl:[{v:0,c:'rgba(4,6,10,.3)'},{v:100,c:'rgba(4,6,10,.3)'}],series:[{pts:this.st.hist,c:'#4aa3ff',w:2.4}],pt:[this.st.Q,this.st.T]})}
 });
 const G1a=[{ch:'nitro',chart:svgHeating,q:'1.013×10⁵ Pa で氷を加熱したときの加熱曲線。B→C の区間で温度が一定なのはなぜ？',
   c:['加えた熱が、固体の規則正しい粒子の配列を崩すのに使われるから','熱が容器の外へすべて逃げているから','B→C の間は分子の熱運動が止まっているから','B→C の間は加熱が止まっているから'],a:0,
@@ -704,11 +756,11 @@ const G1b=[{ch:'nitro',chart:svgHeating,q:'D→E の区間は B→C の区間よ
   h:'昇華しやすいのは、分子間力が弱い分子結晶。ヨウ素やドライアイスの仲間を探そう。',ex:'ナフタレン（C₁₀H₈）・ヨウ素・ドライアイスは分子結晶で分子間力が弱く、常温・常圧で昇華しやすい。'}];
 
 /* ---------- STAGE 2 ---------- */
-function balanceSVG(){return `<svg viewBox="0 0 220 112" xmlns="http://www.w3.org/2000/svg" font-family="Zen Kaku Gothic New, sans-serif" fill="#f4f7fb">
-  <path d="M110 34 L98 96 H122 Z" fill="#f4f7fb"/><rect x="84" y="96" width="52" height="7" rx="3" fill="#f4f7fb"/>
-  <g id="bBeam"><rect x="22" y="31" width="176" height="6" rx="3" fill="#f4f7fb"/><circle cx="110" cy="34" r="6" fill="#0072CE"/></g>
-  <g id="bL"><path d="M0 0 L-18 26 M0 0 L18 26" stroke="#93a1b4" stroke-width="1.5"/><path d="M-30 26 H30 Q24 40 0 40 Q-24 40 -30 26Z" fill="#f4f7fb"/><text y="58" text-anchor="middle" font-size="12" font-weight="700">蒸発 ↑</text><text id="bLv" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#04060a" font-family="Chakra Petch">0</text></g>
-  <g id="bR"><path d="M0 0 L-18 26 M0 0 L18 26" stroke="#93a1b4" stroke-width="1.5"/><path d="M-30 26 H30 Q24 40 0 40 Q-24 40 -30 26Z" fill="#4aa3ff"/><text y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#4aa3ff">凝縮 ↓</text><text id="bRv" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#04060a" font-family="Chakra Petch">0</text></g></svg>`}
+function balanceSVG(){return `<svg viewBox="0 0 220 112" xmlns="http://www.w3.org/2000/svg" font-family="Zen Kaku Gothic New, sans-serif" fill="#04060a">
+  <path d="M110 34 L98 96 H122 Z" fill="#04060a"/><rect x="84" y="96" width="52" height="7" rx="3" fill="#04060a"/>
+  <g id="bBeam"><rect x="22" y="31" width="176" height="6" rx="3" fill="#04060a"/><circle cx="110" cy="34" r="6" fill="#0072CE"/></g>
+  <g id="bL"><path d="M0 0 L-18 26 M0 0 L18 26" stroke="#93a1b4" stroke-width="1.5"/><path d="M-30 26 H30 Q24 40 0 40 Q-24 40 -30 26Z" fill="#fff" stroke="#04060a" stroke-width="2"/><text y="58" text-anchor="middle" font-size="12" font-weight="700">蒸発 ↑</text><text id="bLv" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#04060a" font-family="Chakra Petch">0</text></g>
+  <g id="bR"><path d="M0 0 L-18 26 M0 0 L18 26" stroke="#93a1b4" stroke-width="1.5"/><path d="M-30 26 H30 Q24 40 0 40 Q-24 40 -30 26Z" fill="#4aa3ff"/><text y="58" text-anchor="middle" font-size="12" font-weight="700" fill="#4aa3ff">凝縮 ↓</text><text id="bRv" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Chakra Petch">0</text></g></svg>`}
 STAGES.push({title:'蒸発と気液平衡',ch:'mizu',teaser:'ピストンを指で動かして、飽和蒸気圧のふしぎを確かめよう。',
   intro:'ぼくはしずくまる！ふたの開いた容器に水が入っているよ。分子がどんどん外へ逃げていくね。ふたを閉めたら、飛び出す分子（白い波紋）ともどる分子（青い波紋）を天秤でくらべよう。',
   steps:[
@@ -753,12 +805,12 @@ const G2=[{ch:'mizu',chart:svgRates,q:'密閉容器に水を入れた後の、1�
 /* ---------- STAGE 3 ---------- */
 const PS3=psat('w',60),NREF=1.05;
 function gaugeSVG(){const cx=80,cy=78,r=58,A=v=>(-120+v/.30*240)*Math.PI/180;let s='';
-  for(let v=0;v<=.3001;v+=.05){const a=A(v),big=Math.abs(v*10-Math.round(v*10))<.01;s+=`<line x1="${cx+(r-(big?10:6))*Math.sin(a)}" y1="${cy-(r-(big?10:6))*Math.cos(a)}" x2="${cx+r*Math.sin(a)}" y2="${cy-r*Math.cos(a)}" stroke="#f4f7fb" stroke-width="${big?2.4:1.4}"/>`;
+  for(let v=0;v<=.3001;v+=.05){const a=A(v),big=Math.abs(v*10-Math.round(v*10))<.01;s+=`<line x1="${cx+(r-(big?10:6))*Math.sin(a)}" y1="${cy-(r-(big?10:6))*Math.cos(a)}" x2="${cx+r*Math.sin(a)}" y2="${cy-r*Math.cos(a)}" stroke="#04060a" stroke-width="${big?2.4:1.4}"/>`;
     if(big)s+=`<text x="${cx+(r-20)*Math.sin(a)}" y="${cy-(r-20)*Math.cos(a)+3.5}" text-anchor="middle" font-size="10" font-family="Chakra Petch">${v.toFixed(1)}</text>`}
   const a1=A(PS3);s+=`<line x1="${cx+(r-12)*Math.sin(a1)}" y1="${cy-(r-12)*Math.cos(a1)}" x2="${cx+(r+4)*Math.sin(a1)}" y2="${cy-(r+4)*Math.cos(a1)}" stroke="#ff6178" stroke-width="4"/>`;
-  return `<svg viewBox="0 0 160 124" xmlns="http://www.w3.org/2000/svg" fill="#f4f7fb"><path d="M${cx+r*Math.sin(A(0))} ${cy-r*Math.cos(A(0))} A${r} ${r} 0 1 1 ${cx+r*Math.sin(A(.3))} ${cy-r*Math.cos(A(.3))}" stroke="#93a1b4" stroke-width="2" fill="none"/>${s}
-    <g id="gN"><path d="M${cx-3} ${cy} L${cx} ${cy-r+8} L${cx+3} ${cy}Z" fill="#4aa3ff"/></g><circle cx="${cx}" cy="${cy}" r="6" fill="#f4f7fb"/>
-    <text id="gV" x="${cx}" y="${cy+26}" text-anchor="middle" font-size="16" font-weight="700" font-family="Chakra Petch">0.20</text><text x="${cx}" y="${cy+40}" text-anchor="middle" font-size="9" fill="#93a1b4">水蒸気の圧力 ×10⁵Pa</text>
+  return `<svg viewBox="0 0 160 124" xmlns="http://www.w3.org/2000/svg" fill="#04060a"><path d="M${cx+r*Math.sin(A(0))} ${cy-r*Math.cos(A(0))} A${r} ${r} 0 1 1 ${cx+r*Math.sin(A(.3))} ${cy-r*Math.cos(A(.3))}" stroke="#93a1b4" stroke-width="2" fill="none"/>${s}
+    <g id="gN"><path d="M${cx-3} ${cy} L${cx} ${cy-r+8} L${cx+3} ${cy}Z" fill="#4aa3ff"/></g><circle cx="${cx}" cy="${cy}" r="6" fill="#04060a"/>
+    <text id="gV" x="${cx}" y="${cy+26}" text-anchor="middle" font-size="16" font-weight="700" font-family="Chakra Petch">0.20</text><text x="${cx}" y="${cy+40}" text-anchor="middle" font-size="9" fill="#5b6878">水蒸気の圧力 ×10⁵Pa</text>
     <text x="${cx+(r+6)*Math.sin(a1)+2}" y="${cy-(r+6)*Math.cos(a1)-2}" font-size="8" fill="#ff6178" font-family="Zen Kaku Gothic New" font-weight="700">飽和蒸気圧</text></svg>`}
 STAGES.push({title:'飽和蒸気圧',ch:'eteru',teaser:'バーナーと山の上の気圧で、沸騰を自分で操ろう。',
   intro:'エテルンだよ〜。60℃の水と水蒸気が気液平衡になっている容器だよ。青いピストンを指でつかんで上下に動かし、圧力計の針がどうなるか見てね。',
