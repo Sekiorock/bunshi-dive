@@ -90,6 +90,9 @@ button:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
 .meter .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--blue2),var(--blue));border-radius:8px}
 .meter .bar i.max{background:var(--ink)}
 .meter .note{font-size:11.5px;color:var(--mute2);margin-top:4px;min-height:1.4em;font-weight:700}
+.vbtn{min-height:44px;padding:0 16px;border-radius:999px;background:var(--paper);color:var(--ink);font-family:var(--disp);font-weight:800;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.4),inset 0 0 0 2px var(--ink);display:flex;align-items:center;gap:6px}
+.vbtn svg{width:18px;height:18px}
+.vbtn.on{background:var(--blue);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.4)}
 .clock{width:min(150px,40vw);background:var(--paper);border-radius:50%;padding:4px;box-shadow:0 8px 24px rgba(0,0,0,.4);touch-action:none;cursor:grab}
 .clock svg{display:block;width:100%;height:auto}
 
@@ -575,10 +578,10 @@ cv.addEventListener('pointermove',e=>{const p=ptrs.get(e.pointerId);if(!p)return
   if(active&&e.pointerId===activeId){if(!S.paused){active.move&&active.move(e,dx,dy);S.lastAct=now()}return}
   const c=S.cur;if(!c||c.fixedCam||c.noOrbit)return;
   if(ptrs.size===1){cam.th-=dx*.006;if(c.thR)cam.th=clamp(cam.th,c.thR[0],c.thR[1]);cam.ph=clamp(cam.ph-dy*.004,.55,1.45)}
-  else if(ptrs.size===2){const [a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(pinchD>0)cam.rT=clamp(pinchR*pinchD/d,6,60)}});
+  else if(ptrs.size===2){const [a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(pinchD>0)cam.rT=clamp(pinchR*pinchD/d,6,90)}});
 const pend=e=>{ptrs.delete(e.pointerId);if(active&&e.pointerId===activeId){active.up&&active.up(e);active=null;S.lastAct=now()}};
 cv.addEventListener('pointerup',pend);cv.addEventListener('pointercancel',pend);
-cv.addEventListener('wheel',e=>{e.preventDefault();cam.rT=clamp(cam.rT*(1+e.deltaY*.001),6,60)},{passive:false});
+cv.addEventListener('wheel',e=>{e.preventDefault();cam.rT=clamp(cam.rT*(1+e.deltaY*.001),6,90)},{passive:false});
 function resize(){const w=innerWidth,h=innerHeight;R.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();vo=''}
 addEventListener('resize',resize);resize();
 
@@ -1073,32 +1076,38 @@ STAGES.push({ch:'nitro',
       const ch=h*.3,cb=top+(bot-top)*.3+.08;const c=new THREE.Mesh(new THREE.CylinderGeometry(top+.06,cb,ch,22,1),snowM);c.position.set(p.x,base+h-ch/2+.02,p.z);G.add(c)};
     mkMt(LOC[1].pos,2.2,15,9.4);mkMt(LOC[2].pos,3,21,14.7);
     this.targets=[];LOC.forEach((L,k)=>{const top=L.pos.y-2.75;const ring=new THREE.Mesh(new THREE.RingGeometry(1.6,2,40),new THREE.MeshBasicMaterial({color:0x4aa3ff,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false}));ring.rotation.x=-Math.PI/2;ring.position.set(L.pos.x,top+.05,L.pos.z);G.add(ring);
-      const lb=textSprite(`${L.ja}  ${L.alt} m  ${L.P.toFixed(2)}×10⁵Pa`,`${L.en}  ${L.alt} m  ${L.P.toFixed(2)}×10⁵ Pa`,{px:46,h:k?1.1:.6,border:'#0072CE'});lb.position.set(L.pos.x,top+(k?5.2:-0.4),L.pos.z+(k?0:5.5));G.add(lb);
-      const tap=new THREE.Mesh(new THREE.SphereGeometry(k?4:0.01,12,8),invis());tap.position.set(L.pos.x,top+1,L.pos.z);G.add(tap);if(k)addGrab(tap,{silent:true,down:()=>this.travel(k)});
-      this.targets.push({ring,top})});
+      const lb=textSprite(`${L.ja}  ${L.alt} m  ${L.P.toFixed(2)}×10⁵Pa`,`${L.en}  ${L.alt} m  ${L.P.toFixed(2)}×10⁵ Pa`,{px:46,h:k?1.9:1.4,border:'#0072CE'});lb.position.set(L.pos.x+(k?0:-8),top+(k?6:1.6),L.pos.z+(k?0:3));G.add(lb);
+      const tap=new THREE.Mesh(new THREE.SphereGeometry(k?4:5,12,8),invis());tap.position.set(L.pos.x,top+1,L.pos.z);G.add(tap);const tg=addGrab(tap,{silent:true,down:()=>this.travel(k)});
+      this.targets.push({ring,top,tg})});
     // lab drag
     const hit=new THREE.Mesh(new THREE.BoxGeometry(4.6,3.9,4.6),invis());hit.position.y=1.75;lab.add(hit);const plane=new THREE.Plane(),tmp=new THREE.Vector3();
-    addGrab(hit,{down:()=>{if(st.trav)return;st.dragLab=true;camera.getWorldDirection(tmp);plane.setFromNormalAndCoplanarPoint(tmp,this.home())},
+    addGrab(hit,{down:()=>{if(st.trav)return;st.dragLab=true;if(st.view==='near'){this.setView('far');st.autoFar=true}camera.getWorldDirection(tmp);plane.setFromNormalAndCoplanarPoint(tmp,this.home())},
       move:(e)=>{if(!st.dragLab)return;const p=rayAt(e).ray.intersectPlane(plane,tmp);if(p){const off=V2.copy(p).sub(this.home());if(off.length()>3.2)off.setLength(3.2);st.off=(st.off||new THREE.Vector3()).copy(off)}
         let best=-1,bd=95;LOC.forEach((L,k)=>{if(k===st.loc)return;const s=toScreen(V3.copy(L.pos).add(V1.set(0,-1.5,0)));const d=Math.hypot(s[0]-e.clientX,s[1]-e.clientY);if(d<bd){bd=d;best=k}});if(best!==st.hover&&best>=0){Snd.tick();buzz(8)}st.hover=best},
-      up:()=>{if(!st.dragLab)return;st.dragLab=false;const k=st.hover;st.hover=-1;if(st.off)st.off.set(0,0,0);if(k>=0)this.travel(k);else Snd.tap()}});
+      up:()=>{if(!st.dragLab)return;st.dragLab=false;const k=st.hover;st.hover=-1;if(st.off)st.off.set(0,0,0);if(k>=0)this.travel(k);else{Snd.tap();if(st.autoFar){st.autoFar=false;setTimeout(()=>{if(!st.dragLab&&!st.trav)this.setView('near')},400)}}}});
     // character selectors
     this.sel={};[['w',2.1],['e',3.15],['d',4.2]].forEach(([k,x])=>{const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:charTex(LIQ[k].ch),depthWrite:false}));sp.scale.set(1.2,1.2,1);sp.position.set(x,-1.2,3.6);lab.add(sp);
       const ring=new THREE.Mesh(new THREE.RingGeometry(.5,.62,32),new THREE.MeshBasicMaterial({color:0x4aa3ff,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.set(x,-2.4,3.6);lab.add(ring);
       const nm=textSprite(k==='d'?'エーテル':LIQ[k].ja,k==='d'?'ether':LIQ[k].en,{px:34,h:.28,bg:null});nm.position.set(x,-2.1,4.2);lab.add(nm);
       this.sel[k]={sp,ring,jump:0};addGrab(sp,{down:()=>this.pour(k)})});
     lab.position.copy(LOC[0].pos);
+    st.view='near';this.renderView();
     cam.tgt.set(0,6,-34);cam.r=cam.rT=62;cam.xT=0;cam.yT=6;cam.zT=-34;cam.th=.1;cam.ph=1.2;this.thR=[-.5,.6];grid.visible=false;scene.fog.near=60;scene.fog.far=170;st.fly=0},
   home(){return LOC[this.st.loc].pos},
-  travel(k){const st=this.st;if(st.trav||k===st.loc)return;st.trav={from:this.lab.position.clone(),to:LOC[k].pos.clone(),t:0,k};Snd.whoosh();buzz(30);shake(.1);say('nitro',J(`${locName(k)}へ出発！`,`Off to the ${locName(k)}!`),2500)},
+  setView(v){const st=this.st;st.view=v;cam.rT=v==='far'?78:18;cam.ph=v==='far'?1.02:1.2;cam.th=clamp(cam.th,-.3,.4);this.renderView();Snd.whoosh()},
+  renderView(){const far=this.st.view==='far';$('#extra').innerHTML=`<button class="vbtn ${far?'on':''}" id="vbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${far?'<circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M21 21l-5-5"/>':'<path d="M3 20l6-10 4 6 3-4 5 8z"/>'}</svg>${far?J('実験台に近づく','Zoom to the lab'):J('全景を見る（3か所）','See all 3 places')}</button>`;
+    $('#vbtn').onclick=()=>{Snd.init();this.st.autoFar=false;this.setView(far?'near':'far')}},
+  relang(){this.renderView()},
+  travel(k){const st=this.st;if(st.trav||k===st.loc)return;if(st.autoFar||st.view==='far'){st.autoFar=false;st.backNear=true}st.trav={from:this.lab.position.clone(),to:LOC[k].pos.clone(),t:0,k};Snd.whoosh();buzz(30);shake(.1);say('nitro',J(`${locName(k)}へ出発！`,`Off to the ${locName(k)}!`),2500)},
   pour(k){const st=this.st;if(st.liq===k){this.sel[k].jump=1;Snd.boing();return}st.liq=k;st.T=20;st.boil=0;st.bub=[];this.mols.style(LIQ[k].col,LIQ[k].ears);this.sel[k].jump=1;Snd.boing();shake(.12);buzz(30);
     say(LIQ[k].ch,k==='w'?J('しずくまるにもどったよ。','Back to Shizukumaru.'):k==='e'?J('エタのんだよ！ぼくの蒸気圧曲線は水より上にあるよ。','Etanon here! My vapor pressure curve is above water’s.'):J('エテルンだよ〜。ぼくはとっても蒸発しやすいんだ〜。','Eterun here~. I evaporate really easily~.'))},
   tick(dt){const st=this.st,B=this.burner;B.update(dt);st.fly+=dt;
     if(st.trav){const tr=st.trav;tr.t+=dt/1.7;const e=tr.t<.5?2*tr.t*tr.t:1-Math.pow(-2*tr.t+2,2)/2;this.lab.position.lerpVectors(tr.from,tr.to,Math.min(1,e));this.lab.position.y+=Math.sin(Math.PI*Math.min(1,tr.t))*7;
-      if(tr.t>=1){st.loc=tr.k;st.trav=null;this.lab.position.copy(LOC[st.loc].pos);Snd.clack();Snd.mission();shake(.3);buzz(50);toast(locName(st.loc),`${LOC[st.loc].alt} m ・ ${J('外圧','outside')} ${LOC[st.loc].P.toFixed(2)}×10⁵Pa`)}}
+      if(tr.t>=1){st.loc=tr.k;st.trav=null;if(st.backNear){st.backNear=false;this.setView('near')}this.lab.position.copy(LOC[st.loc].pos);Snd.clack();Snd.mission();shake(.3);buzz(50);toast(locName(st.loc),`${LOC[st.loc].alt} m ・ ${J('外圧','outside')} ${LOC[st.loc].P.toFixed(2)}×10⁵Pa`)}}
     else{const tgt=V2.copy(this.home());if(st.off)tgt.add(st.off);this.lab.position.lerp(tgt,Math.min(1,dt*10));if(st.dragLab)this.lab.position.y+=.25+.05*Math.sin(S.t*12)}
     this.targets.forEach((o,k)=>{const show=(st.dragLab&&k!==st.loc)||(S.si===1&&k===1&&st.loc!==1);o.ring.material.opacity=show?(k===st.hover?.95:.45+.25*Math.sin(S.t*6)):0;const s=k===st.hover?1.25:1;o.ring.scale.set(s,s,s)});
-    const lp=this.lab.position;if(st.fly>1.2){cam.xT=lp.x;cam.yT=lp.y+1.4;cam.zT=lp.z;cam.rT=18}
+    const lp=this.lab.position;if(st.fly>1.2){if(!st.flyDone){st.flyDone=1;cam.rT=18}if(st.view==='far'&&!st.trav){cam.xT=0;cam.yT=3;cam.zT=-28}else{cam.xT=lp.x;cam.yT=lp.y+1.4;cam.zT=lp.z}}
+    this.targets.forEach((o,k)=>{o.tg.enabled=k!==st.loc&&!st.trav});
     const alt=clamp(lp.y/14.7,0,1);const sky=new THREE.Color(0x071a30).lerp(new THREE.Color(0x020306),alt);R.setClearColor(sky);scene.fog.color.copy(sky);
     const P=LOC[st.loc].P;st.P=P;const b=bp(st.liq,P);
     st.T+=(10*B.level-.06*(st.T-20))*dt;if(st.T>b)st.T=b;
@@ -1119,7 +1128,7 @@ STAGES.push({ch:'nitro',
       if(S.si===0&&st.liq==='w'&&st.loc===0&&stepDone(0))say('nitro',J('100℃で沸騰！液体の内部から泡が出ているね。次は実験台ごと富士山頂へ運んでみな。','Boiling at 100 °C — bubbles form inside the liquid. Now carry the whole lab to the top of Mt. Fuji.'));
       if(S.si===1&&st.liq==='w'&&st.loc===1&&stepDone(1)){say('nitro',J('富士山頂では約88℃で沸騰！外圧が低いと、低い温度で蒸気圧が外圧に追いつくんだ。','On Mt. Fuji it boils at about 88 °C! With lower outside pressure, the vapor pressure catches up at a lower temperature.'));setTimeout(()=>gate('GATE 5-1',G5a(),()=>say('eteru',J('次はぼくの番だよ〜。タップして容器に入れてね〜。','My turn next~. Tap me to put me in~.'))),1300)}
       if(S.si===2&&st.liq==='d'&&st.loc===0&&stepDone(2)){say('eteru',J('わ〜、たった34℃で沸騰しちゃった〜。','Wow~, I boiled at just 34 °C~.'));setTimeout(()=>gate('GATE 5-2',G5b(),stageClear),1500)}}
-    if(S.si===2){if(st.liq!=='d')S.hint={at:()=>V1.set(4.2,-1.2,3.6).add(this.lab.position),g:'tap',tip:()=>J('エテルンをタップ','Tap Eterun')};else if(st.loc!==0)S.hint={at:()=>V1.copy(this.lab.position).add(V2.set(0,1.6,0)),g:'to',to:()=>V2.copy(LOC[0].pos).add(V3.set(0,-1.5,0)),tip:()=>J('平地へドラッグ','Drag to lowland')};else S.hint=H_BURN(this.lab)}},
+    if(S.si===2){if(st.liq!=='d')S.hint={at:()=>V1.set(4.2,-1.2,3.6).add(this.lab.position),g:'tap',tip:()=>J('エテルンをタップ','Tap Eterun')};else if(st.loc!==0)S.hint={at:()=>V1.copy(this.lab.position).add(V2.set(0,1.6,0)),g:'to',to:()=>V2.copy(LOC[0].pos).add(V3.set(0,-1.5,0)),tip:()=>J('つかむと全景に → 平地へ','Grab it, then drop on the lowland')};else S.hint=H_BURN(this.lab)}},
   draw(){this.mols.draw(this.NL+this.NG,X,Y,Z,ST);const st=this.st;st.bub.forEach((q,k)=>{V1.set(q.x,q.y,q.z);V2.set(q.r,q.r,q.r);M4.compose(V1,QI,V2);this.bm.setMatrixAt(k,M4)});this.bm.count=st.bub.length;this.bm.instanceMatrix.needsUpdate=true},
   chart(){const st=this.st;const ser=['d','e','w'].map(k=>{const pts=[];for(let T=0;T<=100;T+=2){pts.push([T,psat(k,T)]);if(psat(k,T)>1.15)break}return{pts,c:LIQ[k].svg,w:k===st.liq?3:1.2,a:k===st.liq?1:.45}});
     hudChart({x0:0,x1:100,y0:0,y1:1.1,yt:[0,.5,1.01],yf:v=>v.toFixed(v===1.01?2:1),xt:[0,50,100],xf:v=>v+'℃',hl:[{v:st.P,c:'#ff6178',t:J('外圧','outside')}],series:ser,pt:[st.T,psat(st.liq,st.T)]})}
