@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>ぶんしダイブ</title>
+<title>セキオロックダイブ</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&family=Zen+Kaku+Gothic+New:wght@500;700&family=Chakra+Petch:wght@500;700&display=swap">
 <style>
@@ -80,6 +80,7 @@ button:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
 .bal.near{box-shadow:0 0 0 4px var(--blue2),0 0 30px rgba(74,163,255,.7);animation:breath 1s ease-in-out infinite alternate}
 @keyframes breath{to{box-shadow:0 0 0 7px rgba(74,163,255,.4),0 0 40px rgba(74,163,255,.8)}}
 .bal svg{display:block;width:100%;height:auto}
+.bal.sm{width:min(178px,47vw)}.bal.sm .cap{font-size:12px;line-height:1.3}
 .bal .cap{display:block;font-family:var(--disp);font-weight:800;font-size:13px;color:var(--ink);padding-bottom:4px}
 .gauge{width:min(170px,44vw);background:var(--paper);border-radius:18px;padding:4px;box-shadow:0 8px 24px rgba(0,0,0,.4)}
 .gauge svg{display:block;width:100%;height:auto}
@@ -330,6 +331,46 @@ button:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
 .why p+p{margin-top:8px}
 .locked{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
 .locked svg{width:120px;height:120px;filter:brightness(0);opacity:.15}
+
+/* ===== light gaming layer ===== */
+#title{background:#fff}
+#title::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,114,206,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,114,206,.08) 1px,transparent 1px);background-size:26px 26px;animation:gridmove 5s linear infinite;-webkit-mask:linear-gradient(#000,transparent 75%);mask:linear-gradient(#000,transparent 75%)}
+@keyframes gridmove{to{background-position:0 26px}}
+.ttl{position:relative;z-index:1}
+.logo{display:flex;flex-direction:column;align-items:center;gap:2px;transform:skewX(-7deg)}
+.logo .l1{font-size:clamp(40px,12.5vw,66px);color:var(--ink);text-shadow:3px 3px 0 var(--blue2),6px 6px 0 rgba(0,114,206,.25);line-height:1}
+.logo .l2{font-size:clamp(46px,15vw,80px);color:var(--blue);text-shadow:3px 3px 0 var(--ink);line-height:1;letter-spacing:.08em}
+.tagline{display:inline-block;background:var(--ink);color:#fff;font-family:var(--disp);font-weight:800;font-size:clamp(14px,4.4vw,18px);letter-spacing:.08em;padding:5px 16px;transform:skewX(-10deg);box-shadow:4px 4px 0 var(--blue)}
+.btn.start{position:relative;overflow:hidden}
+.btn.start::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 2.6s ease-in-out infinite}
+@keyframes shine{0%,40%{left:-60%}100%{left:130%}}
+.press{font-family:var(--num);font-weight:700;font-size:11px;letter-spacing:.35em;color:var(--blue);animation:blink 1.2s steps(2) infinite;margin-top:-6px}
+@keyframes blink{50%{opacity:0}}
+.stsel button{position:relative;clip-path:polygon(10% 0,100% 0,90% 100%,0 100%);border:0;background:var(--ink);color:#fff}
+.stsel button em{display:block;font-style:normal;font-size:8px;letter-spacing:.15em;color:var(--blue2)}
+.stsel button small{color:#b8c4d2}
+.stsel button:disabled{opacity:1;background:#e3e9f0;color:#9aa8b8}
+.stsel button:disabled em,.stsel button:disabled small{color:#9aa8b8}
+.qrbtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:46px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 2px var(--ink);font-family:var(--disp);font-weight:800;font-size:14px;color:var(--ink)}
+.qrbtn svg{width:22px;height:22px}
+.qrwrap{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.qrbox{width:min(260px,70vw);padding:10px;background:#fff;border-radius:16px;box-shadow:0 0 0 3px var(--ink),6px 6px 0 3px var(--blue)}
+.qrbox svg{display:block;width:100%;height:auto}
+.urlrow{display:flex;gap:8px;align-items:center;width:100%}
+.urlrow code{flex:1;min-width:0;font-family:var(--num);font-size:12px;background:#f1f5fa;border-radius:10px;padding:10px;overflow-wrap:anywhere;user-select:text;-webkit-user-select:text;text-align:left}
+.urlrow .btn{min-height:44px;font-size:14px;padding:0 14px}
+.stg{background:var(--blue);color:#fff;padding:2px 9px;transform:skewX(-10deg);letter-spacing:.1em}
+#coach{position:relative}
+#coach::before,#coach::after{content:"";position:absolute;width:14px;height:14px;border:3px solid var(--blue);pointer-events:none}
+#coach::before{top:-5px;left:-5px;border-right:0;border-bottom:0;border-radius:6px 0 0 0}
+#coach::after{bottom:-5px;right:-5px;border-left:0;border-top:0;border-radius:0 0 6px 0}
+.ro{position:relative}
+.ro::before{content:"";position:absolute;top:5px;right:6px;width:5px;height:5px;background:var(--blue2);transform:rotate(45deg);opacity:.7}
+.gtag{transform:skewX(-10deg);box-shadow:3px 3px 0 var(--blue)}
+.combo{font-family:var(--num);font-weight:700;font-size:13px;letter-spacing:.1em;color:#fff;background:var(--blue);padding:3px 10px;transform:skewX(-10deg);box-shadow:3px 3px 0 var(--ink);animation:comboIn .5s cubic-bezier(.2,1.8,.4,1)}
+@keyframes comboIn{from{transform:skewX(-10deg) scale(2.2);opacity:0}}
+.btn:not(:disabled):hover{filter:brightness(1.08)}
+.panel{box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 6px 0 var(--blue),inset 0 0 0 2px var(--ink)}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
 @media (min-width:760px){#coach,#talk,#readouts,#extra{max-width:640px;width:100%;margin-left:auto;margin-right:auto}}
 </style>
@@ -359,20 +400,23 @@ button:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
   <div class="ttl">
     <div class="langsel" id="langSel"><button data-l="ja">日本語</button><button data-l="en">English</button></div>
     <div class="flag" aria-hidden="true"><i style="background:#0072CE"></i><i style="background:#000"></i><i style="background:#fff"></i></div>
-    <div class="kicker">PHASE CHANGE LAB</div>
-    <h2>ぶんし<span>ダイブ</span></h2>
+    <div class="kicker">PHASE CHANGE ACTION</div>
+    <h2 class="logo"><span class="l1" id="logo1">セキオロック</span><span class="l2" id="logo2">ダイブ</span></h2>
+    <div class="tagline" id="tagline">状態変化をロックしろ！</div>
     <p id="ttlP"></p>
     <div class="partyT"><span id="partyLab"></span><span id="partyCnt"></span></div>
     <div class="party" id="tparty"></div>
-    <button class="btn wide" id="startBtn"></button>
+    <button class="btn wide start" id="startBtn"></button>
+    <div class="press">PRESS START</div>
     <div class="stsel" id="stsel"></div>
+    <button class="qrbtn" id="qrBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3M14 21h3M21 14v2"/></svg><span id="qrLab"></span></button>
   </div>
 </div>
 
 <div id="intro" class="ov dim" hidden><div class="panel in" id="introPanel"></div></div>
 
 <div id="gate" hidden>
-  <div class="ghead"><span class="gtag" id="gtag">GATE</span><span class="gprog" id="gprog"></span></div>
+  <div class="ghead"><span class="gtag" id="gtag">GATE</span><span class="combo" id="combo" hidden></span><span class="gprog" id="gprog"></span></div>
   <div class="gmain">
     <div class="gfig" id="gfig"><div class="gchart" id="gchart"></div><div class="gnote" id="gnote"></div></div>
     <div class="gbody" id="gbody"><div class="gq"><div class="f" id="gqface"></div><p id="gqtext"></p></div><div class="choices" id="gchoices"></div><div class="gex" id="gex" hidden></div></div>
@@ -409,8 +453,8 @@ const LIQ={
 const lname=k=>LIQ[k][S.lang];
 const psat=(k,T)=>Math.pow(10,LIQ[k].A-LIQ[k].B/(LIQ[k].C+T))*1.01325/760;
 const bp=(k,P)=>{let lo=-60,hi=160;for(let i=0;i<40;i++){const m=(lo+hi)/2;psat(k,m)<P?lo=m:hi=m}return (lo+hi)/2};
-const CH={mizu:{ja:'しずくまる',en:'Shizukumaru',f:'H₂O'},nafu:{ja:'ナフくん',en:'Nafu',f:'C₁₀H₈'},etano:{ja:'エタのん',en:'Etanon',f:'C₂H₅OH'},eteru:{ja:'エテルン',en:'Eterun',f:'C₂H₅OC₂H₅'},
-  nitro:{ja:'ちっそん',en:'Chisson',f:'N₂'},dora:{ja:'ドラポン',en:'Dorapon',f:'CO₂'},boss:{ja:'チョウリンカイザー',en:'Critikaiser',f:'超臨界CO₂'}};
+const CH={mizu:{ja:'しずロック',en:'Shizurock',f:'H₂O'},nafu:{ja:'ナフロック',en:'Nafrock',f:'C₁₀H₈'},etano:{ja:'エタロック',en:'Etarock',f:'C₂H₅OH'},eteru:{ja:'ジエチロック',en:'Diethyrock',f:'C₂H₅OC₂H₅'},
+  nitro:{ja:'ナイトロック',en:'Nitrock',f:'N₂'},dora:{ja:'二酸化ロック',en:'Dioxirock',f:'CO₂'},boss:{ja:'超臨界セキオロック',en:'Supercritical Sekiorock',f:'超臨界CO₂'}};
 const cname=id=>CH[id][S.lang];
 const PARTY=['mizu','nafu','etano','eteru','nitro','dora','boss'];
 
@@ -594,7 +638,7 @@ function toast(t,s=''){const el=$('#toast');$('#toastT').textContent=t;$('#toast
 function readouts(list){$('#readouts').innerHTML=list.map(r=>`<div class="ro ${r.cls||''}" id="ro_${r.id}"><span class="k">${r.k}</span><span class="v"></span></div>`).join('')}
 function relabelRO(list){list.forEach(r=>{const el=document.getElementById('ro_'+r.id);if(el)el.querySelector('.k').textContent=r.k})}
 function setRO(id,html,hot){const el=document.getElementById('ro_'+id);if(!el)return;const v=el.querySelector('.v');if(v.innerHTML!==html)v.innerHTML=html;el.classList.toggle('hot',!!hot)}
-function renderCoach(anim=true){const st=S.cur,steps=st.steps,i=S.si;$('#cstep').textContent=`STEP ${Math.min(i+1,steps.length)} / ${steps.length}`;
+function renderCoach(anim=true){const st=S.cur,steps=st.steps,i=S.si;$('#cstep').textContent=`MISSION ${Math.min(i+1,steps.length)} / ${steps.length}`;
   $('#cdots').innerHTML=steps.map((s,k)=>`<i class="${k<i?'on':k===i?'now':''}"></i>`).join('');
   const t=$('#ctext');t.innerHTML=steps[Math.min(i,steps.length-1)].t;if(anim){t.classList.remove('in');void t.offsetWidth;t.classList.add('in');const s=steps[i];S.hint=s&&s.hint?s.hint:null;S.lastAct=now()-2600}}
 function stepDone(i){if(S.si!==i)return false;S.si++;const c=$('#coach');c.classList.add('flash');$('#ctext').innerHTML=J('クリア！','CLEAR!');Snd.mission();buzz(30);shake(.08);S.hint=null;
@@ -698,7 +742,8 @@ function setupCursor(wrap,map){const cur=wrap.querySelector('.cur');
   wrap.onpointerup=wrap.onpointercancel=()=>{wrap.dataset.d=0}}
 
 /* ================= GATE ================= */
-function gate(tag,qs,after){S.paused=true;Snd.flame(0);active=null;S.hint=null;$('#hand').classList.add('off');
+function showCombo(n){const c=$('#combo');c.textContent=`COMBO ×${n}`;c.hidden=false;c.style.animation='none';void c.offsetWidth;c.style.animation='';setTimeout(()=>Snd.note(Math.min(n+4,12)),180)}
+function gate(tag,qs,after){$('#combo').hidden=true;S.paused=true;Snd.flame(0);active=null;S.hint=null;$('#hand').classList.add('off');
   cv.classList.add('frozen');Snd.lock();buzz([40,40,80]);const fz=$('#freeze');fz.hidden=false;fz.classList.remove('go');void fz.offsetWidth;fz.classList.add('go');
   setTimeout(()=>{fz.hidden=true;const g=$('#gate');g.hidden=false;g.style.animation='none';void g.offsetWidth;g.style.animation='';$('#gtag').textContent=tag;showQ(0)},900);
   function showQ(k){const q=qs[k];$('#gprog').innerHTML=qs.map((_,i)=>`<i class="${i<k?'on':i===k?'now':''}"></i>`).join('');
@@ -709,9 +754,9 @@ function gate(tag,qs,after){S.paused=true;Snd.flame(0);active=null;S.hint=null;$
     const body=$('#gbody');body.scrollTop=0;body.style.animation='none';void body.offsetWidth;body.style.animation='rise .4s ease';
     const order=q.c.map((c,i)=>i).sort(()=>Math.random()-.5);let miss=false;const box=$('#gchoices');box.innerHTML='';box.className='choices'+(q.c.every(c=>c.length<=(S.lang==='en'?18:11))?' two':'');S.total++;S.stt[S.stage]=(S.stt[S.stage]||0)+1;
     order.forEach((ci,j)=>{const b=document.createElement('button');b.className='ch';b.innerHTML=`<i>${'ABCD'[j]}</i><span></span>`;b.lastChild.textContent=q.c[ci];
-      b.addEventListener('click',()=>{Snd.init();if(ci===q.a){if(!miss){S.first++;S.sf[S.stage]=(S.sf[S.stage]||0)+1}b.classList.add('ok');box.querySelectorAll('.ch').forEach(x=>x.disabled=true);Snd.good();buzz(25);burst();
+      b.addEventListener('click',()=>{Snd.init();if(ci===q.a){if(!miss){S.first++;S.sf[S.stage]=(S.sf[S.stage]||0)+1;S.combo=(S.combo||0)+1;if(S.combo>=2)showCombo(S.combo)}b.classList.add('ok');box.querySelectorAll('.ch').forEach(x=>x.disabled=true);Snd.good();buzz(25);burst();
           ex.className='gex good';ex.innerHTML=`<b>${J('正解！','Correct!')}</b> `+q.ex;ex.hidden=false;nx.disabled=false;nx.textContent=k+1<qs.length?J('次の問題へ','Next question'):J('ゲートを開ける','Open the gate');nx.onclick=()=>{Snd.tap();k+1<qs.length?showQ(k+1):finish()};setTimeout(()=>ex.scrollIntoView({block:'nearest',behavior:'smooth'}),80)}
-        else{miss=true;b.classList.add('ng');b.disabled=true;Snd.bad();buzz(120);ex.className='gex hint';ex.innerHTML=`<b>${J('ヒント','Hint')}</b> `+q.h;ex.hidden=false;setTimeout(()=>ex.scrollIntoView({block:'nearest',behavior:'smooth'}),80)}});box.appendChild(b)})}
+        else{if(!miss)S.combo=0;miss=true;b.classList.add('ng');b.disabled=true;Snd.bad();buzz(120);ex.className='gex hint';ex.innerHTML=`<b>${J('ヒント','Hint')}</b> `+q.h;ex.hidden=false;setTimeout(()=>ex.scrollIntoView({block:'nearest',behavior:'smooth'}),80)}});box.appendChild(b)})}
   function finish(){$('#gate').hidden=true;cv.classList.remove('frozen');Snd.unlock();toast('UNLOCK',J('ゲート突破！','Gate cleared!'));shake(.15);S.paused=false;S.lastAct=now()-2600;after&&after()}}
 
 /* ================= EFFECTS ================= */
@@ -773,7 +818,7 @@ function makeThermo(x,z,y0,y1,T0,T1,marks,parent=G){const g=new THREE.Group();g.
   const col=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,1,12),new THREE.MeshPhongMaterial({color:0x4aa3ff,emissive:0x0072CE,emissiveIntensity:.5}));col.geometry.translate(0,.5,0);col.position.y=y0;g.add(tube,bulb,col);
   marks.forEach(T=>{const yy=y0+(T-T0)/(T1-T0)*(y1-y0);const tk=new THREE.Mesh(new THREE.BoxGeometry(.5,.04,.04),new THREE.MeshBasicMaterial({color:0xf4f7fb}));tk.position.y=yy;g.add(tk);const l=textSprite(T+'℃',T+'°C',{px:40,h:.36,bg:null});l.position.set(.75,yy,0);g.add(l)});
   return {set(T){col.scale.y=Math.max(.02,(clamp(T,T0,T1)-T0)/(T1-T0)*(y1-y0))},glow(on){col.material.emissiveIntensity=on?.9+.4*Math.sin(S.t*10):.5}}}
-class Rings{constructor(n){this.p=[];const geo=new THREE.RingGeometry(.1,.17,24);for(let i=0;i<n;i++){const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false}));m.rotation.x=-Math.PI/2;m.visible=false;m.userData.t=9;G.add(m);this.p.push(m)}}
+class Rings{constructor(n,parent=G){this.p=[];const geo=new THREE.RingGeometry(.1,.17,24);for(let i=0;i<n;i++){const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false}));m.rotation.x=-Math.PI/2;m.visible=false;m.userData.t=9;parent.add(m);this.p.push(m)}}
   spawn(x,y,z,col){const m=this.p.find(q=>q.userData.t>.7);if(!m)return;m.position.set(x,y,z);m.material.color.setHex(col);m.userData.t=0;m.visible=true}
   update(dt){this.p.forEach(m=>{if(!m.visible)return;const t=m.userData.t+=dt;if(t>.7){m.visible=false;return}const s=1+t*5;m.scale.set(s,s,s);m.material.opacity=.95*(1-t/.7)})}}
 const EQ={nL:0,acc:0,e:1,s:4,top:6,slotP:new Int16Array(MAX),N:0,ev:[],co:[],open:false,onEv:null,onCo:null,gas:0,esc:0};
@@ -798,30 +843,38 @@ STAGES.push({ch:'mizu',
   get title(){return J('融解と凝固','Melting & Freezing')},
   get short(){return J('融解','Melt')},
   get intro(){return J('−20℃の氷（水分子216個）をバーナーで加熱するよ。炎は指で上下にスワイプして調節。温度計の目盛りと分子の動きをよく見てね。','Heat a block of ice at −20 °C (216 water molecules) with the burner. Swipe up or down on the burner to set the flame. Watch the thermometer and how the molecules move.')},
-  get dare(){return J('ぼくはしずくまる。カチコチの氷だよ。温めても温めても、ある温度で温度がぜんぜん上がらなくなるんだ…その秘密、わかるかな？',"I'm Shizukumaru, frozen solid. Heat me all you want — at some points my temperature just won't go up. Can you figure out why?")},
+  get dare(){return J('ぼくはしずロック。カチコチの氷だよ。温めても温めても、ある温度で温度がぜんぜん上がらなくなるんだ…その秘密、わかるかな？',"I'm Shizurock, frozen solid. Heat me all you want — at some points my temperature just won't go up. Can you figure out why?")},
   get steps(){return [
     {t:J('バーナーを指で<b>上にスワイプ</b>して、火をつけよう','<b>Swipe up</b> on the burner to light it'),hint:H_BURN()},
     {t:J('温度計を見ながら加熱を続け、<b>氷をすべて融かそう</b>','Keep heating and watch the thermometer. <b>Melt all the ice</b>')},
     {t:J('さらに加熱して、<b>すべての分子を気体</b>にしよう','Keep heating until <b>every molecule is a gas</b>')}]},
   ro(){return [{id:'T',k:J('温度','Temp')},{id:'Q',k:J('加えた熱','Heat added')},{id:'s',k:J('状態','State'),cls:'state'}]},
   chartInfo(){return [J('加熱曲線　温度−加えた熱','Heating curve'),[{c:'#4aa3ff',t:J('温度','temp')}]]},
-  setup(){const st=this.st={Q:0,hist:[[0,-20]],ht:0,said:{},lastT:-20};this.N=216;
+  setup(){const st=this.st={Q:0,hist:[[0,-20]],ht:0,said:{},lastT:-20,lastNg:0,ev:[],co:[],swAcc:0,off:0,bt:0};this.N=216;this.rings=new Rings(40);
     let k=0;for(let a=0;a<6;a++)for(let b=0;b<6;b++)for(let c=0;c<6;c++){HX[k]=-1.05+a*.42;HY[k]=.25+b*.42;HZ[k]=-1.05+c*.42;X[k]=HX[k];Y[k]=HY[k];Z[k]=HZ[k];ST[k]=0;k++}
     const idx=[...Array(216).keys()];idx.sort((i,j)=>(Math.max(Math.abs(HX[j]),Math.abs(HZ[j]),Math.abs(HY[j]-1.3))-Math.max(Math.abs(HX[i]),Math.abs(HZ[i]),Math.abs(HY[i]-1.3)))+(Math.random()-.5)*.3);
     this.rank=new Int16Array(216);idx.forEach((i,r)=>this.rank[i]=r);
     this.mols=new Mols(216);glassBox(2,7);this.plate=plate();this.burner=makeBurner(-1);this.thm=makeThermo(2.75,1.2,.2,6.4,-20,120,[0,100]);
-    cam.rT=18.5;cam.yT=1.7;cam.th=-.15;grid.position.y=-2.5},
+    cam.rT=18.5;cam.yT=1.7;cam.th=-.15;grid.position.y=-2.5;this.relang()},
+  relang(){$('#extra').innerHTML=balDiv(J('液体と気体が共存すると動き出すよ','Moves once liquid and gas coexist'))},
   thermo(Q){if(Q<.76)return{T:-20+Q/.038,fm:0,fv:0};if(Q<6.76)return{T:0,fm:(Q-.76)/6,fv:0};if(Q<14.26)return{T:(Q-6.76)/.075,fm:1,fv:0};if(Q<55.26)return{T:100,fm:1,fv:(Q-14.26)/41};return{T:Math.min(120,100+(Q-55.26)/.034),fm:1,fv:1}},
   stateName(ng,nl,N){return ng===N?J('気体','Gas'):ng>0?J('液体＋気体','Liquid+Gas'):nl===N?J('液体','Liquid'):nl>0?J('固体＋液体','Solid+Liquid'):J('固体','Solid')},
   tick(dt){const st=this.st,N=this.N,B=this.burner;B.update(dt);st.Q=clamp(st.Q+B.level*3.2*dt,0,55.95);const th=this.thermo(st.Q),T=th.T;st.T=T;
     const ng=Math.round(th.fv*N),nl=Math.round(th.fm*N);const nliq=nl-ng;const hL=.2+nliq*.0062;
     const amp=.015+.06*clamp((T+20)/20,0,1),gsp=3.2*Math.sqrt((T+273)/373);
+    if(ng>st.lastNg){for(let k=0;k<Math.min(25,ng-st.lastNg);k++)st.ev.push(S.t)}else if(ng<st.lastNg){for(let k=0;k<Math.min(25,st.lastNg-ng);k++)st.co.push(S.t)}st.lastNg=ng;
+    if(ng>0&&nliq>0){st.swAcc+=dt*5;while(st.swAcc>=1){st.swAcc--;let gi=-1,gy=1e9,lj=-1,ly=-1e9;
+      for(let i=0;i<N;i++){if(ST[i]===2&&Y[i]<gy&&VY[i]<=0){gy=Y[i];gi=i}if(ST[i]===1&&Y[i]>ly){ly=Y[i];lj=i}}
+      if(gi>=0&&lj>=0){const t=this.rank[gi];this.rank[gi]=this.rank[lj];this.rank[lj]=t;this.rings.spawn(X[gi],hL+.05,Z[gi],0x4aa3ff);this.rings.spawn(X[lj],hL+.05,Z[lj],0xffffff);st.ev.push(S.t);st.co.push(S.t)}}}
     for(let i=0;i<N;i++){const r=this.rank[i];const s=r<ng?2:(r<nl?1:0);
       if(s!==ST[i]){if(s===2){const d=randDir(gsp,true);VX[i]=d[0];VY[i]=d[1];VZ[i]=d[2];Snd.pop(.05)}if(s===1&&ST[i]===0){VX[i]=VY[i]=VZ[i]=0;Snd.drip()}if(s===0)Snd.tick();ST[i]=s}
       if(s===0){const tx=HX[i]+amp*Math.sin(S.t*31+i*1.7),ty=HY[i]+amp*Math.sin(S.t*27+i*2.3),tz=HZ[i]+amp*Math.sin(S.t*29+i*.9);const k=Math.min(1,dt*10);X[i]+=(tx-X[i])*k;Y[i]+=(ty-Y[i])*k;Z[i]+=(tz-Z[i])*k}
       else if(s===1){const ac=8+T*.06;VX[i]+=(Math.random()-.5)*ac*dt*6;VY[i]+=(Math.random()-.5)*ac*dt*6;VZ[i]+=(Math.random()-.5)*ac*dt*6;
         if(Y[i]>hL)VY[i]-=14*dt;const damp=Math.exp(-dt*3);VX[i]*=damp;VY[i]*=damp;VZ[i]*=damp;const lim=.6+T*.012,sp=Math.hypot(VX[i],VY[i],VZ[i]);if(sp>lim){VX[i]*=lim/sp;VY[i]*=lim/sp;VZ[i]*=lim/sp}gasMove(i,dt,6.8,.18)}
       else{const sp=Math.hypot(VX[i],VY[i],VZ[i])||1,f=1+(gsp/sp-1)*Math.min(1,dt*2);VX[i]*=f;VY[i]*=f;VZ[i]*=f;gasMove(i,dt,6.8,.18)}}
+    this.rings.update(dt);st.bt+=dt;if(st.bt>.1){st.bt=0;const re=trim3(st.ev),rc=trim3(st.co);const co=ng>0&&nliq>0;
+      setBal(re,rc,!co?J('液体と気体が共存すると動き出すよ','Moves once liquid and gas coexist'):Math.abs(re-rc)<1.5?J('つり合っている（気液平衡）','Balanced (equilibrium)'):re>rc?J('蒸発の方が多い','More evaporation'):J('凝縮の方が多い','More condensation'))}
+    if(ng>0&&nliq>0&&B.level<=0){st.off+=dt;if(st.off>3&&!st.said.eq){st.said.eq=1;say('mizu',J('火を止めたら、飛び出す分子（白）ともどる分子（青）がつり合った！密閉容器の中の気液平衡だよ。','With the flame off, molecules leaving (white) and returning (blue) balance out! That is equilibrium in a closed container.'))}}else st.off=0;
     this.plate.material.emissiveIntensity=Math.max(0,B.level)*1.1;this.plate.material.emissive.setHex(B.level<0?0xcfe8ff:0x0072CE);if(B.level<0)this.plate.material.emissiveIntensity=-B.level*.6;
     if(Math.abs(T-st.lastT)>=2){st.lastT=Math.round(T/2)*2;Snd.tempTick(T)}
     st.ht+=dt;if(st.ht>.08&&B.level!==0){st.ht=0;const l=st.hist[st.hist.length-1];if(Math.abs(l[0]-st.Q)>.05)st.hist.push([st.Q,T])}
@@ -829,7 +882,7 @@ STAGES.push({ch:'mizu',
     setRO('T',`${T.toFixed(1)}<small>℃</small>`,flat);setRO('Q',`${st.Q.toFixed(1)}<small>kJ</small>`);setRO('s',this.stateName(ng,nl,N),flat);
     if(S.si===0&&B.level>=.45&&stepDone(0))say('mizu',J('あったか〜い…。温度計の目盛りと、ぼくたちのふるえ方を見ていてね。下にスワイプすると液体窒素で冷やすこともできるよ。','Ahh, warm... Watch the thermometer and how we shake. Swipe down to cool with liquid nitrogen.'));
     if(T===0&&nl>0&&!st.said.m){st.said.m=1;shake(.12);say('mizu',J('温度が0℃のまま止まった！加えた熱は、固体の規則正しい配列を崩すのに使われているんだ。','The temperature is stuck at 0 °C! The heat is being used to break up the neat arrangement of the solid.'));toast(J('融解','Melting'),J('0℃のまま上がらない！','Stuck at 0 °C!'))}
-    if(T===100&&ng>0&&!st.said.b){st.said.b=1;shake(.12);say('mizu',J('100℃で沸騰！今度の「温度一定」は長いよ。熱は分子間力を振り切って気体にするのに使われるんだ。','Boiling at 100 °C! This flat part is long. The heat is used to pull molecules free of each other into the gas.'));toast(J('沸騰','Boiling'),J('100℃のまま上がらない！','Stuck at 100 °C!'))}
+    if(T===100&&ng>0&&!st.said.b){st.said.b=1;shake(.12);say('mizu',J('100℃で沸騰！飛び出す分子（白い波紋）が多いけど、もどる分子（青い波紋）もあるよ。天秤を見てね。熱は分子間力を振り切るのに使われるから、温度は100℃のまま。','Boiling at 100 °C! Many molecules leave (white ripples), but some come back (blue ripples) — watch the balance. The heat goes into pulling molecules apart, so it stays at 100 °C.'));toast(J('沸騰','Boiling'),J('100℃のまま上がらない！','Stuck at 100 °C!'))}
     if(S.si===1&&nl===N&&stepDone(1)){B.level=Math.min(B.level,0);setTimeout(()=>gate('GATE 1-1',G1a(),()=>say('mizu',J('さあ、もう一度バーナーを上げて、全部を水蒸気にしよう！','Now turn the burner up again and turn it all into steam!'))),900)}
     if(S.si===2&&ng===N&&stepDone(2)){setTimeout(()=>gate('GATE 1-2',G1b(),stageClear),900)}
     if(S.si===2)S.hint=B.level<=.05?H_BURN():null},
@@ -854,7 +907,7 @@ STAGES.push({ch:'nafu',
   get title(){return J('昇華と分子間力','Sublimation & Intermolecular Forces')},
   get short(){return J('昇華','Subl.')},
   get intro(){return J('−10℃の冷凍庫の中に、氷（水）とナフタレン（防虫剤）の結晶があるよ。どちらも分子が分子間力で集まった分子結晶。分子を指でつまんで引っぱり、分子間力の強さをくらべよう。','Inside a freezer at −10 °C sit two crystals: ice (water) and naphthalene (mothballs). Both are molecular crystals held together by intermolecular forces. Pinch a molecule with your finger and pull it to compare how strong those forces are.')},
-  get dare(){return J('ぼくはナフくん。防虫剤のナフタレンさ。ぼくの仲間は、液体にならずにスッと空へ消えていく…氷のやつらとくらべてごらん。',"I'm Nafu, the mothball. My friends vanish into the air without ever becoming liquid... Compare us with those ice guys.")},
+  get dare(){return J('ぼくはナフロック。防虫剤のナフタレンさ。ぼくの仲間は、液体にならずにスッと空へ消えていく…氷のやつらとくらべてごらん。',"I'm Nafrock, the mothball. My friends vanish into the air without ever becoming liquid... Compare us with those ice guys.")},
   get steps(){return [
     {t:J('<b>氷</b>の分子を指でつまんで、<b>引きはがしてみよう</b>','Pinch a molecule of <b>ice</b> and <b>try to pull it off</b>'),hint:{at:()=>this.molPos(this.pick('w')),g:'to',to:()=>V2.copy(this.molPos(this.pick('w'))).add(V3.set(0,2.4,1.5)),tip:()=>J('つまんで引っぱる','Pinch & pull')}},
     {t:J('<b>ナフタレン</b>の分子を指でつまんで、<b>引きはがそう</b>','Pinch a <b>naphthalene</b> molecule and <b>pull it off</b>'),hint:{at:()=>this.molPos(this.pick('n')),g:'to',to:()=>V2.copy(this.molPos(this.pick('n'))).add(V3.set(0,2.4,1.5)),tip:()=>J('つまんで引っぱる','Pinch & pull')}},
@@ -933,11 +986,16 @@ const G2=()=>[{ch:'nafu',q:J('氷の分子はなかなか引きはがせなか�
   ex:J('ナフタレンは無極性分子で、分子間にはたらくのは弱いファンデルワールス力だけ。水は極性分子で、分子間に強い水素結合がはたらく。だから氷の分子ははがれにくい。（分子量はナフタレン128、水18で、ナフタレンの方が大きい）','Naphthalene is nonpolar, so only weak van der Waals forces act between its molecules. Water is polar and forms strong hydrogen bonds, so ice molecules are hard to separate. (Molecular mass: naphthalene 128, water 18.)')},
  {ch:'nafu',q:J('ナフタレンのように、固体が液体を経ずに直接気体になる変化を何という？','What is it called when a solid turns directly into a gas without becoming a liquid, like naphthalene?'),c:J(['昇華','蒸発','融解','凝縮'],['Sublimation','Evaporation','Melting','Condensation']),a:0,
   h:J('教科書の図2「物質の状態変化」で、固体→気体の矢印についている名前は？','In the textbook diagram of state changes, what is the arrow from solid to gas called?'),ex:J('固体→気体の変化を昇華という。逆に気体→固体の変化は凝華（昇華ということもある）。','Solid → gas is sublimation. The reverse, gas → solid, is deposition.')},
- {ch:'nafu',q:J('ナフくん「ぼくの仲間はどれ？」 常温・常圧で昇華しやすい物質を選ぼう。','Nafu: “Which one is my buddy?” Choose the substance that sublimes easily at room temperature and pressure.'),c:J(['ヨウ素','塩化ナトリウム','ショ糖（砂糖）','鉄'],['Iodine','Sodium chloride','Sucrose (sugar)','Iron']),a:0,
+ {ch:'nafu',q:J('ナフロック「ぼくの仲間はどれ？」 常温・常圧で昇華しやすい物質を選ぼう。','Nafrock: “Which one is my buddy?” Choose the substance that sublimes easily at room temperature and pressure.'),c:J(['ヨウ素','塩化ナトリウム','ショ糖（砂糖）','鉄'],['Iodine','Sodium chloride','Sucrose (sugar)','Iron']),a:0,
   h:J('昇華しやすいのは、無極性分子でできた分子結晶。ナフタレン・ドライアイスと同じ仲間を探そう。','Easy sublimation = molecular crystals of nonpolar molecules. Find the one in the same group as naphthalene and dry ice.'),
   ex:J('ヨウ素 I₂ は無極性分子からなる分子結晶で、分子間力が弱く昇華しやすい。ナフタレン・ドライアイス（CO₂）も同じ仲間。ショ糖は分子結晶だが、分子間に水素結合がはたらくので昇華しにくい。','Iodine (I₂) is a molecular crystal of nonpolar molecules with weak intermolecular forces, so it sublimes easily — like naphthalene and dry ice (CO₂). Sucrose is molecular too, but its molecules form hydrogen bonds, so it does not sublime easily.')}];
 
 /* ---------- STAGE 3: evaporation & equilibrium ---------- */
+function setBal(re,rc,cap){const a=clamp((rc-re)*2.2,-18,18)*Math.PI/180,L=80;const lx=110-L*Math.cos(a),ly=34-L*Math.sin(a),rx=110+L*Math.cos(a),ry=34+L*Math.sin(a);
+  const b=document.getElementById('bBeam');if(!b)return;b.setAttribute('transform',`rotate(${a*180/Math.PI} 110 34)`);document.getElementById('bL').setAttribute('transform',`translate(${lx} ${ly})`);document.getElementById('bR').setAttribute('transform',`translate(${rx} ${ry})`);
+  document.getElementById('bLv').textContent=re.toFixed(0);document.getElementById('bRv').textContent=rc.toFixed(0);if(cap!==undefined){const c=document.getElementById('balCap');if(c&&c.textContent!==cap)c.textContent=cap}}
+const balDiv=(cap='')=>`<div class="bal sm">${balanceSVG()}<span class="cap" id="balCap">${cap}</span></div>`;
+const trim3=a=>{const lim=S.t-3;while(a.length&&a[0]<lim)a.shift();return a.length/3};
 function balanceSVG(){return `<svg viewBox="0 0 220 112" xmlns="http://www.w3.org/2000/svg" font-family="Zen Kaku Gothic New, sans-serif" fill="#04060a">
   <path d="M110 34 L98 96 H122 Z" fill="#04060a"/><rect x="84" y="96" width="52" height="7" rx="3" fill="#04060a"/>
   <g id="bBeam"><rect x="22" y="31" width="176" height="6" rx="3" fill="#04060a"/><circle cx="110" cy="34" r="6" fill="#0072CE"/></g>
@@ -947,7 +1005,7 @@ STAGES.push({ch:'etano',
   get title(){return J('蒸発と気液平衡','Evaporation & Equilibrium')},
   get short(){return J('平衡','Equil.')},
   get intro(){return J('ふたの開いた容器に水が入っているよ。分子がどんどん外へ逃げていくね。ふたを閉めたら、飛び出す分子（白い波紋）ともどる分子（青い波紋）を天秤でくらべよう。','Water sits in an open container, and molecules keep escaping. Close the lid, then compare molecules leaving (white ripples) and returning (blue ripples) on the balance.')},
-  get dare(){return J('エタのんだよ。ふたを閉めた容器の中って、蒸発が止まってるんでしょ？…ほんとにそう思う？','I’m Etanon. Inside a closed container evaporation just stops, right? ...Are you sure?')},
+  get dare(){return J('エタロックだよ。ふたを閉めた容器の中って、蒸発が止まってるんでしょ？…ほんとにそう思う？','I’m Etarock. Inside a closed container evaporation just stops, right? ...Are you sure?')},
   get steps(){return [
     {t:J('ふたを指でつかんで<b>下にスワイプ</b>し、容器を閉じよう','Grab the lid and <b>swipe down</b> to close the container'),hint:{at:()=>V1.set(0,S.cur.st.lid+.2,0),g:'down',tip:()=>J('ふたを下へ','Lid down')}},
     {t:J('天秤を見守り、<b>蒸発と凝縮がつり合ったら天秤をタップ！</b>','Watch the balance. <b>Tap it when evaporation and condensation are equal!</b>')}]},
@@ -966,9 +1024,7 @@ STAGES.push({ch:'etano',
   close(){const st=this.st;if(st.closed)return;st.closed=true;st.lid=6.09;EQ.open=false;for(let i=0;i<EQ.N;i++)if(ST[i]===2&&Y[i]>5.83){ST[i]=-1;EQ.esc++}
     this.lidGrab.enabled=false;Snd.clack();buzz(40);shake(.25);st.t0=S.t;st.hist=[];EQ.ev=[];EQ.co=[];$('#balCap').textContent=J('つり合ったらタップ！','Tap when balanced!');
     if(stepDone(0))say('etano',J('バタン！これで分子は外に逃げられない。凝縮する分子（青）がだんだん増えてくるよ。','Clunk! Now molecules cannot escape. Watch the condensing molecules (blue) increase.'))},
-  balance(re,rc){const a=clamp((rc-re)*2.2,-18,18)*Math.PI/180,L=80;const lx=110-L*Math.cos(a),ly=34-L*Math.sin(a),rx=110+L*Math.cos(a),ry=34+L*Math.sin(a);
-    const b=document.getElementById('bBeam');if(!b)return;b.setAttribute('transform',`rotate(${a*180/Math.PI} 110 34)`);document.getElementById('bL').setAttribute('transform',`translate(${lx} ${ly})`);document.getElementById('bR').setAttribute('transform',`translate(${rx} ${ry})`);
-    document.getElementById('bLv').textContent=re.toFixed(0);document.getElementById('bRv').textContent=rc.toFixed(0)},
+  balance(re,rc){setBal(re,rc)},
   check(){const st=this.st;if(S.paused)return;if(!st.closed){Snd.bad();say('etano',J('まずは、ふたを下にスワイプして容器を閉じよう！','First swipe the lid down to close the container!'));return}
     const re=EQ.ev.length/3,rc=EQ.co.length/3,el=S.t-st.t0;
     if(el>8&&rc/Math.max(1,re)>.8){if(stepDone(1)){toast(J('気液平衡','Equilibrium'),J('蒸発 ＝ 凝縮','evaporation = condensation'));shake(.15);say('etano',J('止まってなかった…！見かけ上は変化がないけど、蒸発も凝縮もずっと起こってる。これが気液平衡なんだね。','It never stopped...! It looks unchanged, but evaporation and condensation keep happening. That is equilibrium.'));setTimeout(()=>gate('GATE 3',G3(),stageClear),1500)}}
@@ -1004,7 +1060,7 @@ STAGES.push({ch:'eteru',
   get title(){return J('飽和蒸気圧','Saturated Vapor Pressure')},
   get short(){return J('蒸気圧','Vapor')},
   get intro(){return J('60℃の水と水蒸気が気液平衡になっている容器だよ。青いピストンを指でつかんで上下に動かし、圧力計の針がどうなるか見てね。','A container holds water and water vapor in equilibrium at 60 °C. Grab the blue piston, move it up and down, and watch the pressure gauge needle.')},
-  get dare(){return J('エテルンだよ〜。ピストンで押しても圧力が変わらないって、信じる〜？','I’m Eterun~. Would you believe the pressure doesn’t change even when you push the piston~?')},
+  get dare(){return J('ジエチロックだよ〜。ピストンで押しても圧力が変わらないって、信じる〜？','I’m Diethyrock~. Would you believe the pressure doesn’t change even when you push the piston~?')},
   get steps(){return [
     {t:J('ピストンを指でつかんで、<b>下に押しこもう</b>','Grab the piston and <b>push it down</b>'),hint:H_PIST('down','ピストンを下へ','Push down')},
     {t:J('指をはなして、<b>圧力計の針</b>をしばらく見守ろう','Let go and watch the <b>gauge needle</b> for a while')},
@@ -1040,7 +1096,7 @@ STAGES.push({ch:'eteru',
 const G4a=()=>[{ch:'eteru',q:J('60℃で、水（液体）が残っている容器の体積を半分にした。十分に時間がたった後の水蒸気の圧力は？','At 60 °C, the volume of a container that still has liquid water is halved. After enough time, what is the vapor pressure?'),c:J(['変わらない','約2倍になる','約1/2になる','0になる'],['Unchanged','About doubled','About halved','Zero']),a:0,
   h:J('体積を小さくすると、まず気体の分子が混み合う。すると凝縮と蒸発のどちらが多くなる？','A smaller volume first crowds the gas molecules. Then which happens more: condensation or evaporation?'),
   ex:J('押しこむと一時的に圧力が上がるが、凝縮が多くなって気体の分子が減り、再び気液平衡にもどる。液体がある限り圧力は60℃の飽和蒸気圧のまま。','Pushing raises the pressure for a moment, but more condensation removes gas molecules until equilibrium returns. While liquid remains, the pressure stays at the saturated vapor pressure for 60 °C.')}];
-const G4b=()=>[{ch:'etano',chart:()=>svgVP({vl:[70]}),q:J('エタのん「ぼくの出番！」 蒸気圧曲線から、70℃でのエタノールの蒸気圧を読み取ろう。','Etanon: “My turn!” Read the vapor pressure of ethanol at 70 °C from the curves.'),c:['0.72×10⁵ Pa','0.31×10⁵ Pa','0.47×10⁵ Pa','1.01×10⁵ Pa'],a:0,
+const G4b=()=>[{ch:'etano',chart:()=>svgVP({vl:[70]}),q:J('エタロック「ぼくの出番！」 蒸気圧曲線から、70℃でのエタノールの蒸気圧を読み取ろう。','Etarock: “My turn!” Read the vapor pressure of ethanol at 70 °C from the curves.'),c:['0.72×10⁵ Pa','0.31×10⁵ Pa','0.47×10⁵ Pa','1.01×10⁵ Pa'],a:0,
   h:J('70℃の赤い線と、エタノールの曲線（白）が交わる点の高さを読もう。水の曲線（青）と間違えないで。','Read the height where the red 70 °C line meets the ethanol curve (white). Don’t mix it up with water (blue).'),ex:J('70℃の線とエタノールの曲線の交点は約0.72×10⁵ Pa。曲線の取り違えに注意。','The 70 °C line meets the ethanol curve at about 0.72×10⁵ Pa. Be careful to use the right curve.')},
  {ch:'eteru',chart:()=>svgVP(),q:J('同じ温度で比べたとき、最も蒸発しやすい物質はどれ？','At the same temperature, which substance evaporates most easily?'),c:J(['ジエチルエーテル','エタノール','水','どれも同じ'],['Diethyl ether','Ethanol','Water','All the same']),a:0,
   h:J('同じ温度で蒸気圧が大きいほど、分子が気体になりやすい。いちばん上にある曲線は？','Higher vapor pressure at the same temperature = easier to become gas. Which curve is on top?'),ex:J('同温で蒸気圧が最大のジエチルエーテルが最も蒸発しやすい（分子間力が弱い）。','Diethyl ether has the highest vapor pressure at any temperature, so it evaporates most easily (weakest intermolecular forces).')},
@@ -1054,21 +1110,21 @@ const locName=k=>LOC[k][S.lang];
 STAGES.push({ch:'nitro',
   get title(){return J('沸騰と外圧','Boiling & Outside Pressure')},
   get short(){return J('沸騰','Boil')},
-  get intro(){return J('ふたのない容器を、空気（外圧）が押しているよ。蒸気圧が外圧と等しくなると、液体の内部から泡が出る。これが沸騰！平地・富士山頂・キリマンジャロ山頂の3か所へ、実験台ごと運んで確かめよう。','An open container is pressed on by the air (outside pressure). When the vapor pressure equals the outside pressure, bubbles form inside the liquid — boiling! Carry the whole lab to three places — lowland, the top of Mt. Fuji, and the top of Kilimanjaro — and test it.')},
-  get dare(){return J('ちっそんだ。オレは−196℃で沸騰する。沸点ってのは外圧しだいで変わるんだぜ。山に登って確かめな。','I’m Chisson. I boil at −196 °C. A boiling point depends on the outside pressure. Climb a mountain and see for yourself.')},
+  get intro(){return J('加熱前は、液面から飛び出す分子（白い波紋）ともどる分子（青い波紋）がほぼつり合っている（気液平衡に近い）。天秤で確かめながら加熱しよう。ふたのない容器を、空気（外圧）が押しているよ。蒸気圧が外圧と等しくなると、液体の内部から泡が出る。これが沸騰！平地・富士山頂・キリマンジャロ山頂の3か所へ、実験台ごと運んで確かめよう。','Before heating, molecules leaving the surface (white ripples) and returning (blue ripples) are nearly balanced — close to equilibrium. Watch the balance as you heat. An open container is pressed on by the air (outside pressure). When the vapor pressure equals the outside pressure, bubbles form inside the liquid — boiling! Carry the whole lab to three places — lowland, the top of Mt. Fuji, and the top of Kilimanjaro — and test it.')},
+  get dare(){return J('ナイトロックだ。オレは−196℃で沸騰する。沸点ってのは外圧しだいで変わるんだぜ。山に登って確かめな。','I’m Nitrock. I boil at −196 °C. A boiling point depends on the outside pressure. Climb a mountain and see for yourself.')},
   get steps(){return [
     {t:J('バーナーを<b>上にスワイプ</b>して、平地で水を沸騰させよう','<b>Swipe up</b> on the burner and boil water at the lowland'),hint:H_BURN(this.lab)},
     {t:J('実験台をつかんで<b>富士山頂へドラッグ</b>し、もう一度沸騰させよう','Grab the lab and <b>drag it to the top of Mt. Fuji</b>, then boil again'),hint:{at:()=>V1.copy(this.lab.position).add(V2.set(0,1.6,0)),g:'to',to:()=>V2.copy(LOC[1].pos).add(V3.set(0,-1.5,0)),tip:()=>J('富士山頂へドラッグ','Drag to Mt. Fuji')}},
-    {t:J('<b>エテルンをタップ</b>して入れかえ、平地にもどって沸騰させよう','<b>Tap Eterun</b> to swap liquids, go back to the lowland and boil')}]},
+    {t:J('<b>ジエチロックをタップ</b>して入れかえ、平地にもどって沸騰させよう','<b>Tap Diethyrock</b> to swap liquids, go back to the lowland and boil')}]},
   ro(){return [{id:'loc',k:J('場所','Place'),cls:'state'},{id:'T',k:J('液温','Liquid temp')},{id:'pv',k:J('蒸気圧','Vapor p.')},{id:'pe',k:J('外圧','Outside p.')},{id:'s',k:J('状態','State'),cls:'state'}]},
   chartInfo(){return [J('蒸気圧曲線','Vapor pressure curves'),[{c:'#4aa3ff',t:lname('w')},{c:'#f4f7fb',t:lname('e')},{c:'#9cc0ea',t:J('エーテル','ether')},{c:'#ff6178',t:J('外圧','outside')}]]},
-  setup(){const st=this.st={liq:'w',loc:0,T:20,boil:0,ev:0,bub:[],trav:null,dragLab:false,hover:-1};
+  setup(){const st=this.st={liq:'w',loc:0,T:20,boil:0,ev:0,cAcc:0,evT:[],coT:[],bt:0,bub:[],trav:null,dragLab:false,hover:-1};
     const lab=this.lab=new THREE.Group();G.add(lab);
     this.NL=162;this.NG=110;for(let i=0;i<this.NL;i++){ST[i]=1;X[i]=slotX(i);Y[i]=slotY(i);Z[i]=slotZ(i)}for(let i=this.NL;i<this.NL+this.NG;i++)ST[i]=-1;
     this.mols=new Mols(this.NL+this.NG,.17,lab);this.mols.style(LIQ.w.col,true);glassBox(2,3.4,lab);this.plate=plate(lab);this.burner=makeBurner(0,lab);this.thm=makeThermo(-2.75,1.2,.2,3.4,0,110,[50,100],lab);
     const deck=new THREE.Mesh(new THREE.CylinderGeometry(6.2,6.2,.35,40),new THREE.MeshPhongMaterial({color:0x0e1724,emissive:0x0072CE,emissiveIntensity:.08}));deck.position.y=-2.62;lab.add(deck);
     const rim=new THREE.Mesh(new THREE.TorusGeometry(6.2,.08,8,60),new THREE.MeshBasicMaterial({color:0x4aa3ff}));rim.rotation.x=Math.PI/2;rim.position.y=-2.45;lab.add(rim);
-    this.bm=new THREE.InstancedMesh(new THREE.SphereGeometry(1,16,12),new THREE.MeshPhongMaterial({color:0xffffff,transparent:true,opacity:.3,shininess:100,depthWrite:false}),60);this.bm.count=0;this.bm.frustumCulled=false;lab.add(this.bm);
+    this.bm=new THREE.InstancedMesh(new THREE.SphereGeometry(1,16,12),new THREE.MeshPhongMaterial({color:0xffffff,transparent:true,opacity:.3,shininess:100,depthWrite:false}),60);this.bm.count=0;this.bm.frustumCulled=false;lab.add(this.bm);this.rings=new Rings(50,lab);
     // world
     const ground=new THREE.Mesh(new THREE.CylinderGeometry(14,16,.6,40),new THREE.MeshPhongMaterial({color:0x0c1521,flatShading:true}));ground.position.y=-3.1;G.add(ground);
     const mtM=new THREE.MeshPhongMaterial({color:0x0e1826,flatShading:true,shininess:8}),snowM=new THREE.MeshPhongMaterial({color:0xf4f7fb,flatShading:true});
@@ -1095,12 +1151,12 @@ STAGES.push({ch:'nitro',
     cam.tgt.set(0,6,-34);cam.r=cam.rT=62;cam.xT=0;cam.yT=6;cam.zT=-34;cam.th=.1;cam.ph=1.2;this.thR=[-.5,.6];grid.visible=false;scene.fog.near=60;scene.fog.far=170;st.fly=0},
   home(){return LOC[this.st.loc].pos},
   setView(v){const st=this.st;st.view=v;cam.rT=v==='far'?78:18;cam.ph=v==='far'?1.02:1.2;cam.th=clamp(cam.th,-.3,.4);this.renderView();Snd.whoosh()},
-  renderView(){const far=this.st.view==='far';$('#extra').innerHTML=`<button class="vbtn ${far?'on':''}" id="vbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${far?'<circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M21 21l-5-5"/>':'<path d="M3 20l6-10 4 6 3-4 5 8z"/>'}</svg>${far?J('実験台に近づく','Zoom to the lab'):J('全景を見る（3か所）','See all 3 places')}</button>`;
+  renderView(){const far=this.st.view==='far';$('#extra').innerHTML=balDiv('')+`<button class="vbtn ${far?'on':''}" id="vbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">${far?'<circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M21 21l-5-5"/>':'<path d="M3 20l6-10 4 6 3-4 5 8z"/>'}</svg>${far?J('近づく','Zoom in'):J('全景','Overview')}</button>`;
     $('#vbtn').onclick=()=>{Snd.init();this.st.autoFar=false;this.setView(far?'near':'far')}},
   relang(){this.renderView()},
   travel(k){const st=this.st;if(st.trav||k===st.loc)return;if(st.autoFar||st.view==='far'){st.autoFar=false;st.backNear=true}st.trav={from:this.lab.position.clone(),to:LOC[k].pos.clone(),t:0,k};Snd.whoosh();buzz(30);shake(.1);say('nitro',J(`${locName(k)}へ出発！`,`Off to the ${locName(k)}!`),2500)},
   pour(k){const st=this.st;if(st.liq===k){this.sel[k].jump=1;Snd.boing();return}st.liq=k;st.T=20;st.boil=0;st.bub=[];this.mols.style(LIQ[k].col,LIQ[k].ears);this.sel[k].jump=1;Snd.boing();shake(.12);buzz(30);
-    say(LIQ[k].ch,k==='w'?J('しずくまるにもどったよ。','Back to Shizukumaru.'):k==='e'?J('エタのんだよ！ぼくの蒸気圧曲線は水より上にあるよ。','Etanon here! My vapor pressure curve is above water’s.'):J('エテルンだよ〜。ぼくはとっても蒸発しやすいんだ〜。','Eterun here~. I evaporate really easily~.'))},
+    say(LIQ[k].ch,k==='w'?J('しずロックにもどったよ。','Back to Shizurock.'):k==='e'?J('エタロックだよ！ぼくの蒸気圧曲線は水より上にあるよ。','Etarock here! My vapor pressure curve is above water’s.'):J('ジエチロックだよ〜。ぼくはとっても蒸発しやすいんだ〜。','Diethyrock here~. I evaporate really easily~.'))},
   tick(dt){const st=this.st,B=this.burner;B.update(dt);st.fly+=dt;
     if(st.trav){const tr=st.trav;tr.t+=dt/1.7;const e=tr.t<.5?2*tr.t*tr.t:1-Math.pow(-2*tr.t+2,2)/2;this.lab.position.lerpVectors(tr.from,tr.to,Math.min(1,e));this.lab.position.y+=Math.sin(Math.PI*Math.min(1,tr.t))*7;
       if(tr.t>=1){st.loc=tr.k;st.trav=null;if(st.backNear){st.backNear=false;this.setView('near')}this.lab.position.copy(LOC[st.loc].pos);Snd.clack();Snd.mission();shake(.3);buzz(50);toast(locName(st.loc),`${LOC[st.loc].alt} m ・ ${J('外圧','outside')} ${LOC[st.loc].P.toFixed(2)}×10⁵Pa`)}}
@@ -1114,10 +1170,14 @@ STAGES.push({ch:'nitro',
     const boiling=st.T>=b-.05&&B.level>.15&&!st.trav;const wasB=st.boil>0;st.boil=boiling?st.boil+dt:0;const pv=psat(st.liq,st.T);const hL=.98;
     const amp=.03+.06*st.T/100;for(let i=0;i<this.NL;i++){X[i]=slotX(i)+amp*Math.sin(S.t*(8+st.T*.1)+i*1.7);Y[i]=slotY(i)+amp*Math.sin(S.t*(7+st.T*.1)+i*2.1)+(boiling?.05*Math.sin(S.t*14+i):0);Z[i]=slotZ(i)+amp*Math.sin(S.t*(9+st.T*.1)+i*.8)}
     const spawn=(x,y,z,v)=>{for(let i=this.NL;i<this.NL+this.NG;i++)if(ST[i]<0){ST[i]=2;X[i]=x;Y[i]=y;Z[i]=z;VX[i]=rnd(-.5,.5);VY[i]=v;VZ[i]=rnd(-.5,.5);return}};
-    st.ev+=dt*(1+14*Math.pow(clamp(pv/P,0,1),3));while(st.ev>=1){st.ev--;spawn(rnd(-1.7,1.7),hL,rnd(-1.7,1.7),rnd(1.2,2.4))}
-    for(let i=this.NL;i<this.NL+this.NG;i++)if(ST[i]===2){X[i]+=VX[i]*dt;Y[i]+=VY[i]*dt;Z[i]+=VZ[i]*dt;if(Y[i]>8)ST[i]=-1}
+    const rel=clamp(pv/P,0,1);
+    st.ev+=dt*(4+26*rel);while(st.ev>=1){st.ev--;const x=rnd(-1.7,1.7),z=rnd(-1.7,1.7);spawn(x,hL,z,rnd(1.2,2.4));st.evT.push(S.t);this.rings.spawn(x,hL+.05,z,0xffffff)}
+    st.cAcc+=dt*(4.2+3*rel);while(st.cAcc>=1){st.cAcc--;let gi=-1;for(let i=this.NL;i<this.NL+this.NG;i++)if(ST[i]===2&&VY[i]>0&&Y[i]<hL+2.6){gi=i;break}
+      if(gi<0){spawn(rnd(-1.7,1.7),hL+1.8,rnd(-1.7,1.7),-1.3);for(let i=this.NL+this.NG-1;i>=this.NL;i--)if(ST[i]===2&&VY[i]<0){gi=i;break}}else{VY[gi]=-rnd(1.1,1.6);VX[gi]*=.3;VZ[gi]*=.3}}
+    for(let i=this.NL;i<this.NL+this.NG;i++)if(ST[i]===2){X[i]+=VX[i]*dt;Y[i]+=VY[i]*dt;Z[i]+=VZ[i]*dt;if(Y[i]>8)ST[i]=-1;else if(VY[i]<0&&Y[i]<=hL){ST[i]=-1;st.coT.push(S.t);this.rings.spawn(X[i],hL+.05,Z[i],0x4aa3ff);Snd.drip()}}
+    this.rings.update(dt);st.bt+=dt;if(st.bt>.1){st.bt=0;const re=trim3(st.evT),rc=trim3(st.coT);setBal(re,rc,boiling?J('沸騰！蒸発が圧倒的','Boiling! Evaporation wins big'):Math.abs(re-rc)<1.3?J('ほぼつり合い（平衡に近い）','Nearly balanced'):J('蒸発の方が多い','More evaporation'))}
     if(boiling&&Math.random()<dt*18&&st.bub.length<60)st.bub.push({x:rnd(-1.6,1.6),y:.2,z:rnd(-1.6,1.6),r:.05,v:rnd(.9,1.5)});
-    for(let k=st.bub.length-1;k>=0;k--){const q=st.bub[k];q.y+=q.v*dt;q.r=Math.min(.32,q.r+dt*.3);q.x+=Math.sin(S.t*5+k)*dt*.2;if(q.y>hL){st.bub.splice(k,1);Snd.pop(.06);spawn(q.x,hL,q.z,2.6);spawn(q.x+.1,hL,q.z,3)}}
+    for(let k=st.bub.length-1;k>=0;k--){const q=st.bub[k];q.y+=q.v*dt;q.r=Math.min(.32,q.r+dt*.3);q.x+=Math.sin(S.t*5+k)*dt*.2;if(q.y>hL){st.bub.splice(k,1);Snd.pop(.06);spawn(q.x,hL,q.z,2.6);spawn(q.x+.1,hL,q.z,3);st.evT.push(S.t,S.t);this.rings.spawn(q.x,hL+.05,q.z,0xffffff)}}
     if(boiling&&Math.random()<dt*4)shake(.03);
     this.plate.material.emissiveIntensity=Math.max(0,B.level)*1.1;this.thm.set(st.T);this.thm.glow(boiling);
     Object.entries(this.sel).forEach(([k,o])=>{o.jump=Math.max(0,o.jump-dt*1.6);const on=k===st.liq;o.sp.position.y=-1.2+Math.sin(o.jump*Math.PI)*1.2+(on?.06*Math.sin(S.t*4):0);const s=on?1.3:1;o.sp.scale.set(s,s,1);o.ring.visible=on});
@@ -1125,10 +1185,10 @@ STAGES.push({ch:'nitro',
     setRO('s',boiling?J('沸騰中！','Boiling!'):pv/P>.75?J('もうすぐ…','Almost...'):J('蒸発のみ','Evaporating'),boiling);
     if(boiling&&!wasB){toast(J('沸騰！','Boiling!'),J(`蒸気圧 ＝ 外圧　${b.toFixed(1)}℃`,`vapor p. = outside p.  ${b.toFixed(1)} °C`));buzz(30)}
     if(st.boil>1.2){
-      if(S.si===0&&st.liq==='w'&&st.loc===0&&stepDone(0))say('nitro',J('100℃で沸騰！液体の内部から泡が出ているね。次は実験台ごと富士山頂へ運んでみな。','Boiling at 100 °C — bubbles form inside the liquid. Now carry the whole lab to the top of Mt. Fuji.'));
+      if(S.si===0&&st.liq==='w'&&st.loc===0&&stepDone(0))say('nitro',J('100℃で沸騰！液体の内部から泡が出て、天秤は蒸発側に大きくかたむいた。もどる分子もいるけど、ずっと少ないね。次は実験台ごと富士山頂へ運んでみな。','Boiling at 100 °C — bubbles form inside, and the balance tips hard toward evaporation. Some molecules still return, but far fewer. Now carry the whole lab to the top of Mt. Fuji.'));
       if(S.si===1&&st.liq==='w'&&st.loc===1&&stepDone(1)){say('nitro',J('富士山頂では約88℃で沸騰！外圧が低いと、低い温度で蒸気圧が外圧に追いつくんだ。','On Mt. Fuji it boils at about 88 °C! With lower outside pressure, the vapor pressure catches up at a lower temperature.'));setTimeout(()=>gate('GATE 5-1',G5a(),()=>say('eteru',J('次はぼくの番だよ〜。タップして容器に入れてね〜。','My turn next~. Tap me to put me in~.'))),1300)}
       if(S.si===2&&st.liq==='d'&&st.loc===0&&stepDone(2)){say('eteru',J('わ〜、たった34℃で沸騰しちゃった〜。','Wow~, I boiled at just 34 °C~.'));setTimeout(()=>gate('GATE 5-2',G5b(),stageClear),1500)}}
-    if(S.si===2){if(st.liq!=='d')S.hint={at:()=>V1.set(4.2,-1.2,3.6).add(this.lab.position),g:'tap',tip:()=>J('エテルンをタップ','Tap Eterun')};else if(st.loc!==0)S.hint={at:()=>V1.copy(this.lab.position).add(V2.set(0,1.6,0)),g:'to',to:()=>V2.copy(LOC[0].pos).add(V3.set(0,-1.5,0)),tip:()=>J('つかむと全景に → 平地へ','Grab it, then drop on the lowland')};else S.hint=H_BURN(this.lab)}},
+    if(S.si===2){if(st.liq!=='d')S.hint={at:()=>V1.set(4.2,-1.2,3.6).add(this.lab.position),g:'tap',tip:()=>J('ジエチロックをタップ','Tap Diethyrock')};else if(st.loc!==0)S.hint={at:()=>V1.copy(this.lab.position).add(V2.set(0,1.6,0)),g:'to',to:()=>V2.copy(LOC[0].pos).add(V3.set(0,-1.5,0)),tip:()=>J('つかむと全景に → 平地へ','Grab it, then drop on the lowland')};else S.hint=H_BURN(this.lab)}},
   draw(){this.mols.draw(this.NL+this.NG,X,Y,Z,ST);const st=this.st;st.bub.forEach((q,k)=>{V1.set(q.x,q.y,q.z);V2.set(q.r,q.r,q.r);M4.compose(V1,QI,V2);this.bm.setMatrixAt(k,M4)});this.bm.count=st.bub.length;this.bm.instanceMatrix.needsUpdate=true},
   chart(){const st=this.st;const ser=['d','e','w'].map(k=>{const pts=[];for(let T=0;T<=100;T+=2){pts.push([T,psat(k,T)]);if(psat(k,T)>1.15)break}return{pts,c:LIQ[k].svg,w:k===st.liq?3:1.2,a:k===st.liq?1:.45}});
     hudChart({x0:0,x1:100,y0:0,y1:1.1,yt:[0,.5,1.01],yf:v=>v.toFixed(v===1.01?2:1),xt:[0,50,100],xf:v=>v+'℃',hl:[{v:st.P,c:'#ff6178',t:J('外圧','outside')}],series:ser,pt:[st.T,psat(st.liq,st.T)]})}
@@ -1148,7 +1208,7 @@ const S5M=[
   {sys:'water',get t(){return J('<b>上にドラッグ</b>して圧力を上げ、温度を変えずに氷を融かそう','<b>Drag up</b> to raise the pressure and melt ice without changing the temperature')},g:'v',lock:'v',s:[.285,.45],ok:r=>r==='L',ch:'mizu',get say(){return J('今度は温度は固定。上に動かすと圧力が上がるよ。氷なのに…？','Now the temperature is fixed. Moving up raises the pressure. Even though it is ice...?')}},
   {sys:'water',get t(){return J('固体・液体・気体が共存する<b>三重点</b>に立とう','Stand on the <b>triple point</b>, where solid, liquid and gas coexist')},g:'free',lock:null,s:[.55,.6],ok:(r,v,u,w)=>Math.hypot(u-PD.water.xt,w-PD.water.yt)<.035,ch:'mizu',get say(){return J('自由に動けるよ。3本の線が交わる点を探そう！','Move freely. Find where the three lines meet!')}},
   {sys:'water',get t(){return J('臨界点をこえて、<b>超臨界流体</b>にしよう','Go past the critical point into a <b>supercritical fluid</b>')},g:'free',lock:null,s:null,ok:r=>r==='X',ch:'mizu',get say(){return J('蒸気圧曲線がとぎれる点が臨界点。その先は液体とも気体ともいえない世界だよ。','The vapor pressure curve ends at the critical point. Beyond it, it is neither liquid nor gas.')}},
-  {sys:'co2',get t(){return J('<b>横にドラッグ</b>して、1.01×10⁵Pa でドライアイスを温めよう','<b>Drag sideways</b> to warm dry ice at 1.01×10⁵ Pa')},g:'h',lock:'h',s:[.1,.18],ok:r=>r==='G',ch:'dora',get say(){return J('ドラポン参上！ここからはCO₂の状態図だ。大気圧でオレを温めてみな。','Dorapon is here! Now it is the CO₂ phase diagram. Warm me up at atmospheric pressure.')}},
+  {sys:'co2',get t(){return J('<b>横にドラッグ</b>して、1.01×10⁵Pa でドライアイスを温めよう','<b>Drag sideways</b> to warm dry ice at 1.01×10⁵ Pa')},g:'h',lock:'h',s:[.1,.18],ok:r=>r==='G',ch:'dora',get say(){return J('二酸化ロック参上！ここからはCO₂の状態図だ。大気圧でオレを温めてみな。','Dioxirock is here! Now it is the CO₂ phase diagram. Warm me up at atmospheric pressure.')}},
   {sys:'co2',get t(){return J('<b>上にドラッグ</b>して、固体のCO₂に圧力をかけてみよう','<b>Drag up</b> to squeeze solid CO₂')},g:'v',lock:'v',s:[.4,.5],ok:(r,v,u,w)=>w>.95,ch:'dora',get say(){return J('温度は固定。水みたいに融けるかな？いちばん上まで押し上げてみな。','Temperature fixed. Will I melt like water? Push all the way to the top.')}},
   {sys:'co2',get t(){return J('5.15×10⁵Pa より上で<b>横にドラッグ</b>し、液体を通って気体にしよう','Above 5.15×10⁵ Pa, <b>drag sideways</b> through liquid into gas')},g:'h',lock:'h',s:[.1,.6],ok:(r,v)=>r==='G'&&v.has('L'),ch:'dora',get say(){return J('三重点（5.15×10⁵Pa）より上なら、オレも液体になれるのさ。','Above the triple point (5.15×10⁵ Pa), even I can be a liquid.')}}];
 const cross=k=>({SL:J('融解','Melting'),LS:J('凝固','Freezing'),LG:J('蒸発（沸騰）','Vaporizing'),GL:J('凝縮','Condensing'),SG:J('昇華','Sublimation'),GS:J('凝華','Deposition'),LX:J('超臨界へ','To supercritical'),GX:J('超臨界へ','To supercritical'),XL:J('液体へ','To liquid'),XG:J('気体へ','To gas')})[k];
@@ -1157,7 +1217,7 @@ STAGES.push({ch:'dora',
   get title(){return J('状態図','Phase Diagram')},
   get short(){return J('状態図','Phase')},
   get intro(){return J('最難関ステージ。キャラクターが状態図の上に立つよ。指でドラッグして温度と圧力を動かし、頭の上のカプセルの分子を見ながら7つのミッションをクリアしよう。','The toughest stage. A character stands on the phase diagram. Drag to change temperature and pressure, watch the molecules in the capsule overhead, and clear 7 missions.')},
-  get dare(){return J('ドラポン参上…。状態図をすべて見極めたら、この先にいる“あいつ”に会わせてやる。液体でも気体でもない、あいつにな。','Dorapon here... Master the whole phase diagram and I’ll take you to “him” — the one who is neither liquid nor gas.')},
+  get dare(){return J('二酸化ロック参上…。状態図をすべて見極めたら、この先にいる“あいつ”に会わせてやる。液体でも気体でもない、あいつにな。','Dioxirock here... Master the whole phase diagram and I’ll take you to “him” — the one who is neither liquid nor gas.')},
   get steps(){return S5M.map(m=>({t:m.t,hint:{at:()=>S.cur.wpos(S.cur.st.u,S.cur.st.v,V1),g:m.g==='free'?'v':m.g,tip:()=>m.g==='h'?J('横にドラッグ','Drag sideways'):m.g==='v'?J('上にドラッグ','Drag up'):J('ドラッグ','Drag')}}))},
   ro(){return [{id:'r',k:J('いまの状態','State now'),cls:'state'},{id:'sys',k:J('物質','Substance')}]},
   chartInfo(){return null},
@@ -1181,7 +1241,7 @@ STAGES.push({ch:'dora',
     grid.position.y=-.3;this.begin(0)},
   relang(){this.paint();setRO('sys',this.st.sys==='water'?J('水 H₂O','Water H₂O'):J('二酸化炭素 CO₂','Carbon dioxide CO₂'))},
   wpos(u,v,out){const cx=110+u*890,cy=920-v*880;return out.set(cx/1024*8-4,.5,cy/1024*8-4)},
-  begin(k){const st=this.st,m=S5M[k];if(m.sys!==st.sys){st.sys=m.sys;toast(J('CO₂ の状態図','CO₂ phase diagram'),J('ドラポンの番だ！','Dorapon’s turn!'));Snd.whoosh();shake(.15)}
+  begin(k){const st=this.st,m=S5M[k];if(m.sys!==st.sys){st.sys=m.sys;toast(J('CO₂ の状態図','CO₂ phase diagram'),J('二酸化ロックの番だ！','Dioxirock’s turn!'));Snd.whoosh();shake(.15)}
     this.cW.visible=st.sys==='water';this.cC.visible=st.sys==='co2';this.pm.style(st.sys==='water'?0x1f7fe0:0x2a3340,st.sys==='water');
     say(m.ch,m.say);setRO('sys',st.sys==='water'?J('水 H₂O','Water H₂O'):J('二酸化炭素 CO₂','Carbon dioxide CO₂'));this.place();
     if(S.si===k&&S.cur.steps[k])S.hint=S.cur.steps[k].hint;S.lastAct=now()-2000},
@@ -1228,7 +1288,7 @@ const G6=()=>[{ch:'mizu',chart:()=>svgPD('water',[[.13,.62,'A'],[.47,.6,'B'],[.6
   h:J('蒸気圧曲線（三重点〜臨界点）の上側、融解曲線の右側が液体の領域。Dは臨界点より高温・高圧であることに注意。','Liquid is above the vapor pressure curve (triple point to critical point) and right of the melting curve. Note D is hotter and higher-pressure than the critical point.'),ex:J('Bが液体。Aは固体、Cは気体、Dは臨界点をこえた超臨界流体。','B is liquid. A is solid, C is gas, and D is a supercritical fluid beyond the critical point.')},
  {ch:'mizu',chart:()=>svgPD('water'),q:J('水の融解曲線は左上がり（負の傾き）になっている。ここからわかることは？','Water’s melting curve leans left (negative slope). What does that tell us?'),c:J(['0℃付近の氷に圧力を加えると、液体になることがある','圧力を上げると水の沸点は下がる','三重点では固体だけが存在する','圧力に関係なく、氷はちょうど0℃で融ける'],['Ice near 0 °C can turn liquid when pressure is applied','Raising pressure lowers water’s boiling point','Only solid exists at the triple point','Ice always melts at exactly 0 °C, whatever the pressure']),a:0,
   h:J('ミッション2を思い出そう。温度を固定して上（高圧）へ動いたら？','Remember mission 2. What happened when you moved up (higher pressure) at a fixed temperature?'),ex:J('融解曲線が左上がりなので、温度一定で加圧すると固体の領域から液体の領域に入る。多くの物質（CO₂など）では右上がりで、この現象は起こらない。','Because the melting curve leans left, pressing at constant temperature moves from solid into liquid. For most substances (like CO₂) it leans right, so this does not happen.')},
- {ch:'dora',chart:()=>svgPD('co2'),q:J('ドラポン「オレの状態図だ」 1.01×10⁵ Pa でドライアイスを加熱するとどうなる？','Dorapon: “My diagram.” What happens when dry ice is heated at 1.01×10⁵ Pa?'),c:J(['−78.5℃で昇華して気体になる','−56.3℃で融解して液体になる','31℃で沸騰する','液体を経て気体になる'],['It sublimes into gas at −78.5 °C','It melts into liquid at −56.3 °C','It boils at 31 °C','It becomes liquid, then gas']),a:0,
+ {ch:'dora',chart:()=>svgPD('co2'),q:J('二酸化ロック「オレの状態図だ」 1.01×10⁵ Pa でドライアイスを加熱するとどうなる？','Dioxirock: “My diagram.” What happens when dry ice is heated at 1.01×10⁵ Pa?'),c:J(['−78.5℃で昇華して気体になる','−56.3℃で融解して液体になる','31℃で沸騰する','液体を経て気体になる'],['It sublimes into gas at −78.5 °C','It melts into liquid at −56.3 °C','It boils at 31 °C','It becomes liquid, then gas']),a:0,
   h:J('1.01×10⁵ Pa の横線は三重点（5.15×10⁵ Pa）より上？下？','Is the 1.01×10⁵ Pa line above or below the triple point (5.15×10⁵ Pa)?'),ex:J('1.01×10⁵ Pa は三重点の圧力より低いので液体の領域を通らない。−78.5℃で昇華する。','1.01×10⁵ Pa is below the triple-point pressure, so it never crosses the liquid region. It sublimes at −78.5 °C.')},
  {ch:'mizu',chart:()=>svgVP({liqs:['w'],vl:[80]}),q:J('【難問】空気を抜いた同じ容積の密閉容器A・Bに、Aには水を多く、Bには少しだけ入れて80℃に保った。どちらにも液体の水が残っている。十分に時間がたった後の容器内の圧力について正しいものは？','[Hard] Two sealed, air-free containers A and B have the same volume. A gets a lot of water, B only a little, and both are kept at 80 °C. Both still contain some liquid. After enough time, which is true about the pressure inside?'),
   c:J(['AとBは等しく、どちらも約0.47×10⁵ Pa','水の多いAの方が大きい','水の少ないBの方が大きい','水の量がわからないと決まらない'],['A and B are equal, both about 0.47×10⁵ Pa','A, with more water, is higher','B, with less water, is higher','It cannot be decided without the amounts']),a:0,
@@ -1237,7 +1297,7 @@ const G6=()=>[{ch:'mizu',chart:()=>svgPD('water',[[.13,.62,'A'],[.47,.6,'B'],[.6
  {ch:'mizu',chart:()=>svgPD('water'),q:J('【最終問題】空気を抜いた丈夫な密閉容器に水を入れ、液体と水蒸気が共存した状態から加熱し続ける（水の量は、加熱しても液体が残り続ける量とする）。状態図の上で、容器内の状態を表す点はどう動き、最後に何が起こる？','[Final question] A strong, sealed, air-free container holds water with liquid and vapor together, and it keeps being heated (there is enough water that some liquid always remains). On the phase diagram, how does the point move, and what finally happens?'),
   c:J(['蒸気圧曲線にそって右上へ進み、臨界点で液面が消えて超臨界流体になる','蒸気圧曲線にそって進み、100℃で液体がすべて気体になる','融解曲線にそって上へ進み、固体になる','温度だけが上がり、圧力は1.01×10⁵ Paのまま変わらない'],['It climbs along the vapor pressure curve, and at the critical point the liquid surface vanishes — a supercritical fluid','It moves along the vapor pressure curve and all the liquid turns to gas at 100 °C','It climbs along the melting curve and becomes solid','Only the temperature rises; the pressure stays at 1.01×10⁵ Pa']),a:0,
   h:J('液体と気体が共存している間、圧力はその温度の飽和蒸気圧になる。密閉されているので、外の大気圧1.01×10⁵ Paは関係ない。蒸気圧曲線のゴールはどこ？','While liquid and gas coexist, the pressure equals the saturated vapor pressure. The container is sealed, so outside air pressure (1.01×10⁵ Pa) does not matter. Where does the vapor pressure curve end?'),
-  ex:J('気液共存の間、点は蒸気圧曲線の上を右上へ進む（温度が上がると飽和蒸気圧も上がる）。密閉容器なので100℃で沸騰して終わることはない。曲線の終点である臨界点（374℃・220×10⁵ Pa）に達すると、液体と気体の区別がなくなって液面が消え、超臨界流体になる。――チョウリンカイザー誕生の瞬間だ。','While liquid and gas coexist, the point moves up and to the right along the vapor pressure curve (higher temperature, higher saturated vapor pressure). In a sealed container it does not simply boil away at 100 °C. At the end of the curve — the critical point (374 °C, 220×10⁵ Pa) — liquid and gas become indistinguishable, the surface vanishes, and it becomes a supercritical fluid. That is how Critikaiser is born.')}];
+  ex:J('気液共存の間、点は蒸気圧曲線の上を右上へ進む（温度が上がると飽和蒸気圧も上がる）。密閉容器なので100℃で沸騰して終わることはない。曲線の終点である臨界点（374℃・220×10⁵ Pa）に達すると、液体と気体の区別がなくなって液面が消え、超臨界流体になる。――超臨界セキオロック誕生の瞬間だ。','While liquid and gas coexist, the point moves up and to the right along the vapor pressure curve (higher temperature, higher saturated vapor pressure). In a sealed container it does not simply boil away at 100 °C. At the end of the curve — the critical point (374 °C, 220×10⁵ Pa) — liquid and gas become indistinguishable, the surface vanishes, and it becomes a supercritical fluid. That is how Supercritical Sekiorock is born.')}];
 
 /* ================= CELEBRATIONS ================= */
 const ALLY=[null,'mizu','nafu','etano','eteru','nitro','dora'];
@@ -1283,11 +1343,11 @@ function finale(){const f=$('#finale');const sec=Math.round((now()-S.start)/1000
   msg('FINAL GATE CLEAR');
   at(1300,()=>{msg(J('…ゴゴゴゴゴ','...rumble rumble'));Snd.rumble(2.6);const b=$('#fboss');b.hidden=false;b.className='boss sil grow';shakeEl(f,2600)});
   at(2600,()=>{$('#fbolt').classList.add('go');Snd.boom();buzz([50,30,50,30,90])});
-  at(3700,()=>{const b=$('#fboss');b.className='boss rev';Snd.firework();msg(J('超臨界の王 <b>チョウリンカイザー</b> があらわれた！','<b>Critikaiser</b>, king of the supercritical, appears!'));stage=1});
+  at(3700,()=>{const b=$('#fboss');b.className='boss rev';Snd.firework();msg(J('超臨界の王 <b>超臨界セキオロック</b> があらわれた！','<b>Supercritical Sekiorock</b>, king of the supercritical, appears!'));stage=1});
   at(6000,()=>{msg(J('「液体でも気体でもない…それが超臨界。オレの正体を見極めた者は、おまえが初めてだ」','“Neither liquid nor gas... that is supercritical. You are the first to see what I truly am.”'))});
   at(8800,()=>reveal());
   function reveal(){if(stage>=2)return;stage=2;T.forEach(clearTimeout);$('#fboss').hidden=false;$('#fboss').className='boss rev';$('#frays').style.opacity=1;
-    msg(J('<b>チョウリンカイザー</b> がなかまになった！','<b>Critikaiser</b> joined your team!'));Snd.anthem();shake(.4);buzz([100,50,100,50,200]);
+    msg(J('<b>超臨界セキオロック</b> がなかまになった！','<b>Supercritical Sekiorock</b> joined your team!'));Snd.anthem();shake(.4);buzz([100,50,100,50,200]);
     if(fxA)fxA.stop();fxA=fxLoop($('#ffx'),{n:200,rain:true,fireworks:true,fwGap:520});
     const par=$('#fpar');par.innerHTML=PARTY.filter(p=>p!=='boss').map((p,i)=>charSVG(p).replace('<svg',`<svg style="--d:${.25+i*.22}s"`)).join('');
     PARTY.slice(0,6).forEach((p,i)=>setTimeout(()=>Snd.note(i+2),250+i*220));
@@ -1371,6 +1431,12 @@ function openProf(id){const p=$('#profPanel');const n=PARTY.indexOf(id)+1;Snd.in
       <div class="tags">${d.tags.map(t=>`<span class="${t[1]}">${t[0]}</span>`).join('')}</div><div class="pfig">${profFig(id)}</div><ul class="facts">${d.facts.map(f=>`<li>${f}</li>`).join('')}</ul><div class="plink">${d.link}</div><button class="btn" id="pOk">${J('閉じる','Close')}</button>`}
   const close=()=>{$('#prof').hidden=true;Snd.tap()};$('#pX').onclick=close;const ok=$('#pOk');if(ok)ok.onclick=close;
   const ov=$('#prof');ov.hidden=false;ov.scrollTop=0;ov.onclick=e=>{if(e.target===ov)close()};p.classList.remove('in');void p.offsetWidth;p.classList.add('in')}
+const QRSVG='<svg viewBox="0 0 33 33" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"><rect width="33" height="33" fill="#fff"/><path d="M2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM5 2h1v1h-1zM6 2h1v1h-1zM7 2h1v1h-1zM8 2h1v1h-1zM10 2h1v1h-1zM11 2h1v1h-1zM13 2h1v1h-1zM14 2h1v1h-1zM16 2h1v1h-1zM19 2h1v1h-1zM24 2h1v1h-1zM25 2h1v1h-1zM26 2h1v1h-1zM27 2h1v1h-1zM28 2h1v1h-1zM29 2h1v1h-1zM30 2h1v1h-1zM2 3h1v1h-1zM8 3h1v1h-1zM11 3h1v1h-1zM13 3h1v1h-1zM14 3h1v1h-1zM20 3h1v1h-1zM24 3h1v1h-1zM30 3h1v1h-1zM2 4h1v1h-1zM4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM8 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM14 4h1v1h-1zM15 4h1v1h-1zM17 4h1v1h-1zM19 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM26 4h1v1h-1zM27 4h1v1h-1zM28 4h1v1h-1zM30 4h1v1h-1zM2 5h1v1h-1zM4 5h1v1h-1zM5 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM11 5h1v1h-1zM15 5h1v1h-1zM16 5h1v1h-1zM19 5h1v1h-1zM20 5h1v1h-1zM21 5h1v1h-1zM24 5h1v1h-1zM26 5h1v1h-1zM27 5h1v1h-1zM28 5h1v1h-1zM30 5h1v1h-1zM2 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM12 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM15 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM24 6h1v1h-1zM26 6h1v1h-1zM27 6h1v1h-1zM28 6h1v1h-1zM30 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM13 7h1v1h-1zM15 7h1v1h-1zM16 7h1v1h-1zM18 7h1v1h-1zM19 7h1v1h-1zM24 7h1v1h-1zM30 7h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM25 8h1v1h-1zM26 8h1v1h-1zM27 8h1v1h-1zM28 8h1v1h-1zM29 8h1v1h-1zM30 8h1v1h-1zM11 9h1v1h-1zM13 9h1v1h-1zM18 9h1v1h-1zM22 9h1v1h-1zM2 10h1v1h-1zM4 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM21 10h1v1h-1zM25 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM2 11h1v1h-1zM3 11h1v1h-1zM4 11h1v1h-1zM5 11h1v1h-1zM9 11h1v1h-1zM11 11h1v1h-1zM13 11h1v1h-1zM17 11h1v1h-1zM19 11h1v1h-1zM21 11h1v1h-1zM22 11h1v1h-1zM24 11h1v1h-1zM25 11h1v1h-1zM29 11h1v1h-1zM30 11h1v1h-1zM2 12h1v1h-1zM3 12h1v1h-1zM4 12h1v1h-1zM5 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM8 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM12 12h1v1h-1zM14 12h1v1h-1zM15 12h1v1h-1zM17 12h1v1h-1zM21 12h1v1h-1zM26 12h1v1h-1zM27 12h1v1h-1zM28 12h1v1h-1zM30 12h1v1h-1zM2 13h1v1h-1zM4 13h1v1h-1zM5 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1zM16 13h1v1h-1zM23 13h1v1h-1zM24 13h1v1h-1zM26 13h1v1h-1zM27 13h1v1h-1zM2 14h1v1h-1zM4 14h1v1h-1zM6 14h1v1h-1zM7 14h1v1h-1zM8 14h1v1h-1zM9 14h1v1h-1zM10 14h1v1h-1zM12 14h1v1h-1zM16 14h1v1h-1zM18 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM25 14h1v1h-1zM30 14h1v1h-1zM2 15h1v1h-1zM3 15h1v1h-1zM4 15h1v1h-1zM9 15h1v1h-1zM13 15h1v1h-1zM15 15h1v1h-1zM17 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM21 15h1v1h-1zM22 15h1v1h-1zM23 15h1v1h-1zM24 15h1v1h-1zM25 15h1v1h-1zM29 15h1v1h-1zM30 15h1v1h-1zM5 16h1v1h-1zM6 16h1v1h-1zM8 16h1v1h-1zM12 16h1v1h-1zM14 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM30 16h1v1h-1zM3 17h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM7 17h1v1h-1zM11 17h1v1h-1zM12 17h1v1h-1zM13 17h1v1h-1zM16 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM22 17h1v1h-1zM24 17h1v1h-1zM26 17h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM7 18h1v1h-1zM8 18h1v1h-1zM9 18h1v1h-1zM11 18h1v1h-1zM13 18h1v1h-1zM15 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM21 18h1v1h-1zM22 18h1v1h-1zM24 18h1v1h-1zM25 18h1v1h-1zM30 18h1v1h-1zM3 19h1v1h-1zM11 19h1v1h-1zM13 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM19 19h1v1h-1zM21 19h1v1h-1zM22 19h1v1h-1zM24 19h1v1h-1zM25 19h1v1h-1zM28 19h1v1h-1zM29 19h1v1h-1zM30 19h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM5 20h1v1h-1zM7 20h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM13 20h1v1h-1zM17 20h1v1h-1zM21 20h1v1h-1zM22 20h1v1h-1zM26 20h1v1h-1zM27 20h1v1h-1zM30 20h1v1h-1zM4 21h1v1h-1zM7 21h1v1h-1zM11 21h1v1h-1zM14 21h1v1h-1zM15 21h1v1h-1zM17 21h1v1h-1zM20 21h1v1h-1zM21 21h1v1h-1zM22 21h1v1h-1zM23 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM7 22h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM17 22h1v1h-1zM20 22h1v1h-1zM22 22h1v1h-1zM23 22h1v1h-1zM24 22h1v1h-1zM25 22h1v1h-1zM26 22h1v1h-1zM27 22h1v1h-1zM29 22h1v1h-1zM10 23h1v1h-1zM11 23h1v1h-1zM12 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM19 23h1v1h-1zM22 23h1v1h-1zM26 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM30 23h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM7 24h1v1h-1zM8 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM14 24h1v1h-1zM15 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM22 24h1v1h-1zM24 24h1v1h-1zM26 24h1v1h-1zM30 24h1v1h-1zM2 25h1v1h-1zM8 25h1v1h-1zM11 25h1v1h-1zM16 25h1v1h-1zM17 25h1v1h-1zM18 25h1v1h-1zM20 25h1v1h-1zM22 25h1v1h-1zM26 25h1v1h-1zM2 26h1v1h-1zM4 26h1v1h-1zM5 26h1v1h-1zM6 26h1v1h-1zM8 26h1v1h-1zM12 26h1v1h-1zM15 26h1v1h-1zM16 26h1v1h-1zM18 26h1v1h-1zM21 26h1v1h-1zM22 26h1v1h-1zM23 26h1v1h-1zM24 26h1v1h-1zM25 26h1v1h-1zM26 26h1v1h-1zM27 26h1v1h-1zM29 26h1v1h-1zM2 27h1v1h-1zM4 27h1v1h-1zM5 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM12 27h1v1h-1zM14 27h1v1h-1zM15 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM18 27h1v1h-1zM21 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM26 27h1v1h-1zM27 27h1v1h-1zM28 27h1v1h-1zM30 27h1v1h-1zM2 28h1v1h-1zM4 28h1v1h-1zM5 28h1v1h-1zM6 28h1v1h-1zM8 28h1v1h-1zM10 28h1v1h-1zM11 28h1v1h-1zM16 28h1v1h-1zM17 28h1v1h-1zM20 28h1v1h-1zM21 28h1v1h-1zM23 28h1v1h-1zM26 28h1v1h-1zM29 28h1v1h-1zM30 28h1v1h-1zM2 29h1v1h-1zM8 29h1v1h-1zM11 29h1v1h-1zM12 29h1v1h-1zM13 29h1v1h-1zM16 29h1v1h-1zM18 29h1v1h-1zM22 29h1v1h-1zM25 29h1v1h-1zM26 29h1v1h-1zM27 29h1v1h-1zM2 30h1v1h-1zM3 30h1v1h-1zM4 30h1v1h-1zM5 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM8 30h1v1h-1zM10 30h1v1h-1zM13 30h1v1h-1zM15 30h1v1h-1zM16 30h1v1h-1zM17 30h1v1h-1zM22 30h1v1h-1zM25 30h1v1h-1zM26 30h1v1h-1zM30 30h1v1h-1z" fill="#04060a"/></svg>';const SITE='https://sekiorock.github.io/bunshi-dive/';
+function openQR(){const p=$('#profPanel');Snd.init();Snd.tap();p.innerHTML=`<button class="pclose" id="pX" aria-label="close">×</button><div class="qrwrap"><div class="bigno">SHARE</div><h3>${J('友だちにセキオロックダイブを教えよう','Share Sekiorock Dive')}</h3><div class="qrbox">${QRSVG}</div><p>${J('スマホのカメラで読み取ると、すぐにプレイできます。','Scan with a phone camera to play right away.')}</p><div class="urlrow"><code id="siteUrl">${SITE}</code><button class="btn ghost" id="cpy">${J('コピー','Copy')}</button></div></div><button class="btn" id="pOk">${J('閉じる','Close')}</button>`;
+  const close=()=>{$('#prof').hidden=true;Snd.tap()};$('#pX').onclick=close;$('#pOk').onclick=close;
+  $('#cpy').onclick=async()=>{try{await navigator.clipboard.writeText(SITE);$('#cpy').textContent=J('コピーしました','Copied')}catch(e){const r=document.createRange();r.selectNodeContents($('#siteUrl'));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);$('#cpy').textContent=J('選択しました','Selected')}};
+  const ov=$('#prof');ov.hidden=false;ov.scrollTop=0;ov.onclick=e=>{if(e.target===ov)close()};p.classList.remove('in');void p.offsetWidth;p.classList.add('in')}
+$('#qrBtn').onclick=openQR;
 function bindParty(host){host.querySelectorAll('.slot').forEach(el=>{const id=el.dataset.id;
   el.onclick=()=>{$('#tip').hidden=true;openProf(id)};
   el.onpointerenter=e=>{if(e.pointerType!=='mouse')return;const t=$('#tip');const has=S.allies.has(id);t.innerHTML=has?`<b>${cname(id)}</b> ${id==='boss'?'scCO₂':CH[id].f}<br>${J('クリックでくわしく','Click for details')}`:J('？？？ まだ なかまではない','??? not on your team yet');const r=el.getBoundingClientRect();t.hidden=false;t.style.left=Math.min(innerWidth-240,Math.max(8,r.left))+'px';t.style.top=(r.bottom+8)+'px'};
@@ -1394,10 +1460,10 @@ function loadStage(n){clearStage();S.stage=n;const d=STAGES[n-1];S.cur=d;d.st={}
   renderIntro();$('#intro').hidden=false;S.paused=true}
 function headerUI(){const n=S.stage,d=S.cur;if(!d)return;$('#stgNo').textContent=`STAGE ${n}`;$('#stgTitle').textContent=d.title;$('#pips').innerHTML=STAGES.map((s,i)=>`<i class="${i+1<n?'on':i+1===n?'now':''}"></i>`).join('')}
 function toTitle(){S.paused=true;$('#hud').hidden=true;$('#intro').hidden=true;$('#gate').hidden=true;closeCele();cv.classList.remove('frozen');clearStage();S.cur=null;buildTitle();$('#title').hidden=false;titleScene()}
-function buildTitle(){$('#ttlP').textContent=J('分子のサイズになって、物質の三態の世界へ。ステージをクリアするたびに、ライバルの分子が仲間になる。最後に待つのは…？','Shrink to the size of a molecule and dive into the states of matter. Each stage you clear, a rival molecule joins your team. And at the very end...?');
+function buildTitle(){$('#logo1').textContent=J('セキオロック','SEKIOROCK');$('#logo2').textContent=J('ダイブ','DIVE');$('#tagline').textContent=J('状態変化をロックしろ！','Lock down the phase changes!');$('#qrLab').textContent=J('友だちに教える（QRコード）','Share with friends (QR code)');$('#ttlP').textContent=J('分子のサイズになって、物質の三態の世界へ。ステージをクリアするたびに、ライバルの分子が仲間になる。最後に待つのは…？','Shrink to the size of a molecule and dive into the states of matter. Each stage you clear, a rival molecule joins your team. And at the very end...?');
   $('#partyLab').textContent=J('なかま（タップで図鑑）','Team (tap for profiles)');$('#partyCnt').textContent=`${[...S.allies].filter(a=>PARTY.includes(a)).length} / ${PARTY.length}`;$('#tparty').innerHTML=partyHTML(null);bindParty($('#tparty'));
-  $('#startBtn').innerHTML=J('スタート<small>音が出ます</small>','START<small>sound on</small>');
-  $('#stsel').innerHTML=STAGES.map((s,i)=>`<button data-n="${i+1}" ${i+1>S.unlocked?'disabled':''}>${i+1}<small>${s.short}</small></button>`).join('');
+  $('#startBtn').innerHTML=J('▶ スタート<small>音が出ます</small>','▶ START<small>sound on</small>');
+  $('#stsel').innerHTML=STAGES.map((s,i)=>`<button data-n="${i+1}" ${i+1>S.unlocked?'disabled':''}><em>LV</em>${i+1}<small>${s.short}</small></button>`).join('');
   $('#stsel').querySelectorAll('button').forEach(b=>b.onclick=()=>{Snd.init();Snd.tap();go(+b.dataset.n)});
   $('#langSel').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.l===S.lang))}
 function setLang(l){if(l===S.lang)return;S.lang=l;document.documentElement.lang=l;saveProg();$('#langBtn').textContent=l==='ja'?'EN':'JA';buildTitle();relangSprites();
